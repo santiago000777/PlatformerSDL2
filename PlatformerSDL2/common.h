@@ -20,7 +20,12 @@
 #include <map>
 
 #define DEBUG()	if(GetAsyncKeyState(VK_ESCAPE)) {__debugbreak();}
+#define BREAK	__debugbreak
 #define PI		3.14159265359
+
+
+	// SDL2
+#include "SDL.h"
 
 
 bool PressedKey(short key) {
