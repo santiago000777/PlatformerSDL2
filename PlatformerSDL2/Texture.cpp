@@ -42,26 +42,23 @@ void TTexture::SetBackground(const std::string& path) {
 
 
 void TTexture::Render() {
-	SDL_RenderClear(renderer);
 	if (background->texture != NULL)
 		SDL_RenderCopy(renderer, texturePicture, 0, box);
 	else {
 		SDL_SetRenderDrawColor(renderer, renderSurfaceColor->r, renderSurfaceColor->g, renderSurfaceColor->b, renderSurfaceColor->a); 
 		SDL_RenderFillRect(renderer, box); 
 	}
-	SDL_RenderPresent(renderer);
+	
 }
 
 void TTexture::Clear() {
 
-	SDL_RenderClear(renderer);
 	if(background->texture != NULL)
 		SDL_RenderCopy(renderer, background->texture, box, box);
 	else {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderFillRect(renderer, box);
 	}
-	SDL_RenderPresent(renderer);
 }
 
 

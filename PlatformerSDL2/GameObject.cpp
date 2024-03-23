@@ -32,14 +32,14 @@ TGameObject::~TGameObject() {
 
 void TGameObject::Posun() {
 
-	posBox->x += vector.x;
+	posBox->x += vector.x + 1;
 	posBox->y += vector.y;
 
 	this->texture->SetRenderBox(this->posBox); 
 }
 
 void TGameObject::Frame() {
-	Posun(); ///
 	this->texture->Render();
 	this->texture->Clear();
+	Posun(); ///
 }

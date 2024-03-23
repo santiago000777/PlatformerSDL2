@@ -14,14 +14,13 @@ int main(int argc, char* args[]) {
 
 	game->AddTexture({ 400, 200 }, { 40, 40 }, { (unsigned char)0, (unsigned char)255, (unsigned char)0, (unsigned char)255 });
 	
-	game->Render();
+	
 	
 	while (!PressedKey(VK_SPACE)) {
-		//game->Loop();
+		game->Loop();
 	}
 	
-	game->Clear();
-	SDL_Delay(3000);
+	
 
 	return 0;
 }

@@ -15,6 +15,7 @@ void TGame::Init(const std::string& windowName, int posX, int posY, int windowWi
 	SDL_Init(SDL_INIT_EVERYTHING);
 	InitWindow(windowName, posX, posY, windowWidth, windowHeight, flags1);
 	InitRenderer(window);
+	//first = std::chrono::high_resolution_clock::now(); 
 }
 
 TGame::~TGame() {
@@ -24,15 +25,17 @@ TGame::~TGame() {
 }
 
 void TGame::Loop() {
-	duration = std::chrono::duration_cast<std::chrono::milliseconds>(second - first);
+	
+	Sleep(5);
 	Posun();
+	
+	duration = std::chrono::duration_cast<std::chrono::milliseconds>(second - first);
 	if (duration.count() >= deltaTime) {
-		Render();
+		first = std::chrono::high_resolution_clock::now();
 		Clear();
+		Render(); 
 	}
-	
 	second = std::chrono::high_resolution_clock::now();
-	
 }
 
 void TGame::AddTexture(TVec4 pos, TVec4 size, const std::string& path) {
@@ -71,10 +74,12 @@ void TGame::Clear() {
 }
 
 void TGame::Render() {
+	SDL_RenderClear(renderer);
 	backGround->Render();
 	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->texture->Render();
 	}
+	SDL_RenderPresent(renderer);
 }
 
 void TGame::Posun() {
