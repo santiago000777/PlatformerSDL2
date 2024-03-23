@@ -28,10 +28,48 @@
 #include "SDL.h"
 
 
-bool PressedKey(short key) {
+static bool PressedKey(short key) {
 	short i = GetAsyncKeyState(toupper(key));
 	if ((i & 0x8000) == 0) {
 		return false;
 	}
 	return true;
 }
+
+
+struct TVec4 {
+public:
+	int x, y;
+
+public:
+	TVec4(int x, int y) {
+		this->x = x;
+		this->y = y;
+	}
+	TVec4() {
+		x = 0;
+		y = 0;
+	}
+
+	void operator+=(const TVec4& vec) {
+		this->x += vec.x;
+		this->y += vec.y;
+	}
+	TVec4& operator+(TVec4 vec) {
+		vec += *this;
+		return vec;
+	}
+};
+
+struct TColor {
+public:
+	unsigned char r, g, b, a;
+
+public:
+	TColor(unsigned char red, unsigned char green, unsigned char blue, unsigned char alfa) {
+		this->r = red;
+		this->g = green;
+		this->b = blue;
+		this->a = alfa;
+	}
+};
