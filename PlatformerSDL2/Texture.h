@@ -12,6 +12,7 @@ public:
 	void SetRenderBox(TVec4 pos, TVec4 size);
 	void SetRenderBox(SDL_Rect* rect);
 	void SetBackground(const std::string& path);
+	void SetBackground(TColor color);
 	void Render();
 	void Clear();
 

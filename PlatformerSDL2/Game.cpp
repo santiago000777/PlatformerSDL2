@@ -53,16 +53,16 @@ void TGame::SetBackGround(const std::string& BGpath) {
 	backGround = bg;
 
 	for (int i = 0; i < objects.size(); i++) {
-
+		objects.at(i)->SetBackground(BGpath);
 	}
 }
 
-void TGame::SetBackGround2(TColor&& color) {
+void TGame::SetBackGround(TColor&& color) {
 	TBackGround* bg = new TBackGround(windowWidth, windowHeight, color);
 	backGround = bg;
 
 	for (int i = 0; i < objects.size(); i++) {
-		//objects.at(i)->SetBackground(color);
+		objects.at(i)->SetBackground(color);
 	}
 }
 

@@ -18,12 +18,12 @@ TGameObject::TGameObject(SDL_Renderer* renderer, TVec4 pos, TVec4 size, TColor* 
 	this->texture->SetRenderBox(posBox);
 }
 
-void TGameObject::SetBackground(std::string& path) {
+void TGameObject::SetBackground(const std::string& path) {
 	this->texture->SetBackground(path);
 }
 
-void TGameObject::SetBackground(TColor&& color) {
-
+void TGameObject::SetBackground(TColor color) {
+	this->texture->SetBackground(color);
 }
 
 TGameObject::~TGameObject() {

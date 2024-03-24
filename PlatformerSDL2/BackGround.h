@@ -15,11 +15,11 @@ public:
 
 	SDL_Surface* surface;
 	SDL_Texture* texture;
+	TColor bgColor;
 
 private:
 	
 
-	TColor* bgColor;
 	SDL_Renderer* renderer;
 
 	SDL_Rect* box = new SDL_Rect();

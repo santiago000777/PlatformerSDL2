@@ -39,6 +39,11 @@ void TTexture::SetBackground(const std::string& path) {
 	
 }
 
+void TTexture::SetBackground(TColor color) {
+	this->background->Init(800, 600, color);
+	background->bgColor = color;
+}
+
 
 
 void TTexture::Render() {
@@ -56,7 +61,7 @@ void TTexture::Clear() {
 	if(background->texture != NULL)
 		SDL_RenderCopy(renderer, background->texture, box, box);
 	else {
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_SetRenderDrawColor(renderer, background->bgColor.r, background->bgColor.g, background->bgColor.b, background->bgColor.a);
 		SDL_RenderFillRect(renderer, box);
 	}
 }

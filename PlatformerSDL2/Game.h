@@ -19,7 +19,7 @@ public:
 	void AddTexture(TVec4 pos, TVec4 size, TColor&& color);
 
 	void SetBackGround(const std::string& BGpath);
-	void SetBackGround2(TColor&& color);
+	void SetBackGround(TColor&& color);
 
 	void Render();
 	void Clear();

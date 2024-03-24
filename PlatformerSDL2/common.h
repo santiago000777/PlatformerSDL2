@@ -66,6 +66,7 @@ public:
 	unsigned char r, g, b, a;
 
 public:
+	TColor() = default;
 	TColor(unsigned char red, unsigned char green, unsigned char blue, unsigned char alfa) {
 		this->r = red;
 		this->g = green;

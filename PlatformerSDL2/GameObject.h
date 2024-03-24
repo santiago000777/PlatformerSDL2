@@ -10,8 +10,8 @@ public:
 	TGameObject(SDL_Renderer* renderer, TVec4 pos, TVec4 size, std::string path);
 	TGameObject(SDL_Renderer* renderer, TVec4 pos, TVec4 size, TColor* color);
 
-	void SetBackground(std::string& path);
-	void SetBackground(TColor&& color);
+	void SetBackground(const std::string& path);
+	void SetBackground(TColor color);
 
 	~TGameObject();
 
