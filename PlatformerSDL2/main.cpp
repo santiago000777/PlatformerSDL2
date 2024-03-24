@@ -12,7 +12,7 @@ int main(int argc, char* args[]) {
 
 	game->SetBackGround2({ (unsigned char)0, (unsigned char)0, (unsigned char)0, (unsigned char)255 });
 
-	game->AddTexture({ 100, 200 }, { 40, 40 }, "C:/Users/Jakub Veit/source/repos/PlatformerSDL2/PlatformerSDL2/Pictures/veitImg.bmp");
+	game->AddTexture({ 100, 200 }, { 40, 40 }, "Pictures/veitImg.bmp");
 	
 	
 	while (!PressedKey(VK_SPACE)) {
