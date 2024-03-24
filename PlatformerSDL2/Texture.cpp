@@ -42,7 +42,7 @@ void TTexture::SetBackground(const std::string& path) {
 
 
 void TTexture::Render() {
-	if (background->texture != NULL)
+	if (this->texturePicture != NULL)
 		SDL_RenderCopy(renderer, texturePicture, 0, box);
 	else {
 		SDL_SetRenderDrawColor(renderer, renderSurfaceColor->r, renderSurfaceColor->g, renderSurfaceColor->b, renderSurfaceColor->a); 

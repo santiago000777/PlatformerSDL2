@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define FPS		30
+#define FPS		165
 
 class TGame
 {

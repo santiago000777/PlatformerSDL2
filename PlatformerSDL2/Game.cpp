@@ -3,8 +3,8 @@
 
 void TGame::InitWindow(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {
 	this->window = SDL_CreateWindow(windowName.c_str(), posX, posY, windowWidth, windowHeight, flags);
-	this->windowWidth = windowWidth; 
-	this->windowHeight = windowHeight; 
+	this->windowWidth = windowWidth;
+	this->windowHeight = windowHeight;
 }
 
 void TGame::InitRenderer(SDL_Window* window, int index, int flags) {
@@ -25,15 +25,15 @@ TGame::~TGame() {
 }
 
 void TGame::Loop() {
-	
+
 	Sleep(5);
 	Posun();
-	
+
 	duration = std::chrono::duration_cast<std::chrono::milliseconds>(second - first);
 	if (duration.count() >= deltaTime) {
 		first = std::chrono::high_resolution_clock::now();
 		Clear();
-		Render(); 
+		Render();
 	}
 	second = std::chrono::high_resolution_clock::now();
 }
@@ -50,12 +50,12 @@ void TGame::AddTexture(TVec4 pos, TVec4 size, TColor&& color) {
 
 void TGame::SetBackGround(const std::string& BGpath) {
 	TBackGround* bg = new TBackGround(windowWidth, windowHeight, BGpath);
-	backGround = bg; 
+	backGround = bg;
 
 	for (int i = 0; i < objects.size(); i++) {
 
 	}
-} 
+}
 
 void TGame::SetBackGround2(TColor&& color) {
 	TBackGround* bg = new TBackGround(windowWidth, windowHeight, color);
@@ -68,7 +68,7 @@ void TGame::SetBackGround2(TColor&& color) {
 
 void TGame::Clear() {
 	//backGround->Render();
-	for (int i = 0; i < objects.size(); i++) { 
+	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->texture->Clear();
 	}
 }
