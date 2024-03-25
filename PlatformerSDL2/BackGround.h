@@ -6,10 +6,12 @@ class TBackGround
 public:
 	TBackGround() = default;
 	TBackGround(int width, int height, TColor color);
-	TBackGround(int width, int height, std::string path);
+	TBackGround(int width, int height, std::string path, SDL_Renderer* renderer);
 
 	void Init(int width, int height, TColor color);
-	void Init(int width, int height, std::string path);
+	void Init(int width, int height, std::string path, SDL_Renderer* renderer);
+
+	void SetRenderer(SDL_Renderer* renderer);
 public:
 	void Render();
 

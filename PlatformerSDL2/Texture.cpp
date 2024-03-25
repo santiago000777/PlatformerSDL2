@@ -29,7 +29,7 @@ void TTexture::SetRenderBox(SDL_Rect* rect) {
 
 
 void TTexture::SetBackground(const std::string& path) {
-	this->background->Init(800, 600, path);															///
+	this->background->Init(800, 600, path, this->renderer);															///
 	if (!path.empty()) {
 		background->surface = SDL_LoadBMP(path.c_str());
 		background->texture = SDL_CreateTextureFromSurface(renderer, background->surface);

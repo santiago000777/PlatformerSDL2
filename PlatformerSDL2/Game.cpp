@@ -26,7 +26,7 @@ TGame::~TGame() {
 
 void TGame::Loop() {
 
-	Sleep(5);
+	Sleep(7);
 	Posun();
 
 	duration = std::chrono::duration_cast<std::chrono::milliseconds>(second - first);
@@ -49,8 +49,9 @@ void TGame::AddTexture(TVec4 pos, TVec4 size, TColor&& color) {
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
-	TBackGround* bg = new TBackGround(windowWidth, windowHeight, BGpath);
+	TBackGround* bg = new TBackGround(windowWidth, windowHeight, BGpath, this->renderer);
 	backGround = bg;
+	//bg->SetRenderer(this->renderer);
 
 	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->SetBackground(BGpath);
