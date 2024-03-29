@@ -4,11 +4,11 @@
 class TGameObject
 {
 public:
-	TTexture* texture = new TTexture();
+	TTexture texture;
 
 public:
-	TGameObject(SDL_Renderer* renderer, TVec4 pos, TVec4 size, std::string path);
-	TGameObject(SDL_Renderer* renderer, TVec4 pos, TVec4 size, TColor* color);
+	TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY);
+	TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, TColor* color);
 
 	void SetBackground(const std::string& path);
 	void SetBackground(TColor color);
@@ -18,9 +18,9 @@ public:
 	void Posun();
 	void Frame();
 private:
-	TVec4 vector;
-	SDL_Rect* posBox = new SDL_Rect();
-
+	TVec2 vector;
+	SDL_Rect dstBox;
+	SDL_Rect srcBox;
 private:
 
 };

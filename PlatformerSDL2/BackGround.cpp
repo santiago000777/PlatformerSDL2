@@ -1,18 +1,18 @@
 #include "BackGround.h"
 
 TBackGround::TBackGround(int width, int height, TColor color) {
- 	this->box->x = 0;
-	this->box->y = 0;
+ 	this->box.x = 0;
+	this->box.y = 0;
 
 	bgColor = color;
-	this->texture = NULL;
+	//this->texture = NULL;
 }
 
 TBackGround::TBackGround(int width, int height, std::string path, SDL_Renderer* renderer) {
-	this->box->x = 0;
-	this->box->y = 0;
-	this->box->w = width;
-	this->box->h = height;
+	this->box.x = 0;
+	this->box.y = 0;
+	this->box.w = width;
+	this->box.h = height;
 
 	//bgColor = NULL;
 	this->renderer = renderer;
@@ -21,18 +21,18 @@ TBackGround::TBackGround(int width, int height, std::string path, SDL_Renderer* 
 }
 
 void TBackGround::Init(int width, int height, TColor color) {
-	this->box->x = 0;
-	this->box->y = 0;
+	this->box.x = 0;
+	this->box.y = 0;
 
 	bgColor = color;
-	this->texture = NULL;
+	//this->texture = NULL;
 }
 
 void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* renderer) {
-	this->box->x = 0;
-	this->box->y = 0;
-	this->box->w = width;
-	this->box->h = height;
+	this->box.x = 0;
+	this->box.y = 0;
+	this->box.w = width;
+	this->box.h = height;
 
 	//bgColor = NULL;
 	this->renderer = renderer;
@@ -47,11 +47,11 @@ void TBackGround::SetRenderer(SDL_Renderer* renderer) {
 void TBackGround::Render() {
 	SDL_RenderClear(renderer);
 	if (this->texture != NULL) {
-		SDL_RenderCopy(renderer, this->texture, 0, box);
+		SDL_RenderCopy(renderer, this->texture, 0, &box);
 	}
 	else {
 		SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
-		SDL_RenderFillRect(renderer, box); 
+		SDL_RenderFillRect(renderer, &box); 
 	}
 	SDL_RenderPresent(renderer); 
 

@@ -24,7 +24,7 @@ private:
 
 	SDL_Renderer* renderer;
 
-	SDL_Rect* box = new SDL_Rect();
+	SDL_Rect box;
 private:
 
 protected:

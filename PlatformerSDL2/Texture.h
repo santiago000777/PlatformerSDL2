@@ -9,23 +9,28 @@ public:
 public:
 	void CreateTexture(SDL_Renderer* renderer, const std::string& path);
 	void CreateTexture(SDL_Renderer* renderer, TColor* color);
-	void SetRenderBox(TVec4 pos, TVec4 size);
 	void SetRenderBox(SDL_Rect* rect);
+	void SetRenderBox(TVec2 pos, TVec2 size);
+	void SetRenderBox(SDL_Rect* rect, TVec2 fromXY, float percentX, float percentY);
 	void SetBackground(const std::string& path);
 	void SetBackground(TColor color);
 	void Render();
 	void Clear();
 
+	SDL_Surface* GetSurface();
+	SDL_Rect* GetSrcRect();
+	SDL_Rect* GetDstRect();
 
 	~TTexture();
 private:
-	SDL_Rect* box;
+	SDL_Rect srcBox;
+	SDL_Rect dstBox;
 	SDL_Surface* surfacePicture;
 	SDL_Texture* texturePicture;
 
 	/*SDL_Surface* surfaceBackground;
 	SDL_Texture* textureBackground;*/
-	TBackGround* background = new TBackGround();
+	TBackGround background;
 
 	SDL_Renderer* renderer;
 

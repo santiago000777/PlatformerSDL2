@@ -15,8 +15,8 @@ public:
 
 	void Loop();
 
-	void AddTexture(TVec4 pos, TVec4 size, const std::string& path);
-	void AddTexture(TVec4 pos, TVec4 size, TColor&& color);
+	void AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
+	void AddTexture(TVec2 pos, TVec2 size, TColor&& color);
 
 	void SetBackGround(const std::string& BGpath);
 	void SetBackGround(TColor&& color);
@@ -36,6 +36,8 @@ private:
 	std::chrono::time_point<std::chrono::high_resolution_clock> first, second;
 	std::chrono::milliseconds duration;
 
+	SDL_Surface finalSurface;
+	SDL_Texture* finalTexture;
 	int windowWidth, windowHeight;
 
 private:

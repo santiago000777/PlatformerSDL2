@@ -37,29 +37,30 @@ static bool PressedKey(short key) {
 }
 
 
-struct TVec4 {
+struct TVec2 {
 public:
 	int x, y;
 
 public:
-	TVec4(int x, int y) {
+	TVec2(int x, int y) {
 		this->x = x;
 		this->y = y;
 	}
-	TVec4() {
+	TVec2() {
 		x = 0;
 		y = 0;
 	}
 
-	void operator+=(const TVec4& vec) {
+	void operator+=(const TVec2& vec) {
 		this->x += vec.x;
 		this->y += vec.y;
 	}
-	TVec4& operator+(TVec4 vec) {
+	TVec2& operator+(TVec2 vec) {
 		vec += *this;
 		return vec;
 	}
 };
+
 
 struct TColor {
 public:
