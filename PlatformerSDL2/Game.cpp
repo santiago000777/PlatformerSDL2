@@ -17,7 +17,6 @@ void TGame::Init(const std::string& windowName, int posX, int posY, int windowWi
 	InitRenderer(window);
 
 	finalSurface = *SDL_CreateRGBSurface(NULL, 600, 600, 32, 0, 0, 0, 0);
-	//first = std::chrono::high_resolution_clock::now(); 
 }
 
 TGame::~TGame() {
@@ -43,7 +42,6 @@ void TGame::Loop() {
 void TGame::AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	TGameObject* object = new TGameObject(renderer, pos, size, path, fromXY, percentX, percentY);
 	objects.push_back(object);
-	//delete object;
 }
 
 void TGame::AddTexture(TVec2 pos, TVec2 size, TColor&& color) {
@@ -53,23 +51,20 @@ void TGame::AddTexture(TVec2 pos, TVec2 size, TColor&& color) {
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
-	TBackGround* bg = new TBackGround(windowWidth, windowHeight, BGpath, this->renderer);
-	backGround = bg;
+	backGround.Init(windowWidth, windowHeight, BGpath, renderer);
 	//bg->SetRenderer(this->renderer);
 	for (int i = 0; i < objects.size(); i++) {
-		objects.at(i)->SetBackground(BGpath);
+		objects.at(i)->SetBackground(&backGround);
 	}
-	//delete bg;
 }
 
 void TGame::SetBackGround(TColor&& color) {
 	TBackGround* bg = new TBackGround(windowWidth, windowHeight, color);
-	backGround = bg;
+	backGround = *bg;
 
 	for (int i = 0; i < objects.size(); i++) {
-		objects.at(i)->SetBackground(color);
+		objects.at(i)->SetBackground(&backGround);
 	}
-	//delete bg;
 }
 
 void TGame::Clear() {
@@ -80,16 +75,9 @@ void TGame::Clear() {
 }
 
 void TGame::Render() {
-	//backGround->Render();
-	SDL_BlitScaled(backGround->surface, NULL, &finalSurface, NULL);
+	SDL_BlitScaled(backGround.surface, NULL, &finalSurface, NULL);
 	for (int i = 0; i < objects.size(); i++) {
-		//objects.at(i)->texture->Render();
-		SDL_Rect* rect1 = objects.at(i)->texture.GetSrcRect();
-		SDL_Rect* rect2 = objects.at(i)->texture.GetDstRect();
-		SDL_Surface* sur = objects.at(i)->texture.GetSurface();
-		//SDL_BlitScaled(objects.at(i)->texture->GetSurface(), objects.at(i)->texture->GetSrcRect(), this->finalSurface, objects.at(i)->texture->GetDstRect());
-		//SDL_BlitSurface(sur, rect1, this->finalSurface, rect2);
-		SDL_BlitScaled(sur, rect1, &(this->finalSurface), rect2);
+		SDL_BlitScaled(objects.at(i)->texture.GetSurface(), objects.at(i)->texture.GetSrcRect(), &this->finalSurface, objects.at(i)->texture.GetDstRect());
 	}
 	finalTexture = SDL_CreateTextureFromSurface(renderer, &this->finalSurface);
 	SDL_RenderClear(renderer);

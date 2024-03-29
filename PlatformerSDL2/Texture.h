@@ -14,6 +14,7 @@ public:
 	void SetRenderBox(SDL_Rect* rect, TVec2 fromXY, float percentX, float percentY);
 	void SetBackground(const std::string& path);
 	void SetBackground(TColor color);
+	void SetBackground(TBackGround* bg);
 	void Render();
 	void Clear();
 
@@ -30,11 +31,11 @@ private:
 
 	/*SDL_Surface* surfaceBackground;
 	SDL_Texture* textureBackground;*/
-	TBackGround background;
+	TBackGround *background;
 
 	SDL_Renderer* renderer;
 
-	TColor* renderSurfaceColor;
+	TColor renderSurfaceColor;
 
 private:
 	

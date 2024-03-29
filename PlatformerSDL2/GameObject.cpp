@@ -28,6 +28,10 @@ void TGameObject::SetBackground(TColor color) {
 	this->texture.SetBackground(color);
 }
 
+void TGameObject::SetBackground(TBackGround* bg) {
+	this->texture.SetBackground(bg);
+}
+
 TGameObject::~TGameObject() {
 	//delete texture;
 }
@@ -40,8 +44,8 @@ void TGameObject::Posun() {
 	this->texture.SetRenderBox(&this->dstBox);
 }
 
-void TGameObject::Frame() {
-	this->texture.Render();
-	this->texture.Clear();
-	Posun(); ///
-}
+//void TGameObject::Frame() {
+//	this->texture.Render();
+//	this->texture.Clear();
+//	Posun(); ///
+//}

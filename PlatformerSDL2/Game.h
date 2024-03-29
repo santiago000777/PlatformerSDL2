@@ -28,7 +28,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	TBackGround* backGround;
+	TBackGround backGround;
 
 	std::vector<TGameObject*> objects;
 
