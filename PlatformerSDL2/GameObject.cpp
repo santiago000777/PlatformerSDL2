@@ -24,6 +24,10 @@ void TGameObject::SetBackground(const std::string& path) {
 	this->texture.SetBackground(path);
 }
 
+void TGameObject::SetWindowSize(SDL_Rect* rect) {
+	this->texture.SetWindowSize(rect);
+}
+
 void TGameObject::SetBackground(TColor color) {
 	this->texture.SetBackground(color);
 }

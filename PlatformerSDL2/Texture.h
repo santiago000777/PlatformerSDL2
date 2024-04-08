@@ -15,6 +15,8 @@ public:
 	void SetBackground(const std::string& path);
 	void SetBackground(TColor color);
 	void SetBackground(TBackGround* bg);
+	void SetWindowSize(SDL_Rect* rect);
+
 	void Render();
 	void Clear();
 
@@ -28,6 +30,8 @@ private:
 	SDL_Rect dstBox;
 	SDL_Surface* surfacePicture;
 	SDL_Texture* texturePicture;
+
+	SDL_Rect* window;
 
 	/*SDL_Surface* surfaceBackground;
 	SDL_Texture* textureBackground;*/

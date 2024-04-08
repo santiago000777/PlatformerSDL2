@@ -10,6 +10,7 @@ public:
 	TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY);
 	TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, TColor* color);
 
+	void SetWindowSize(SDL_Rect* rect);
 	void SetBackground(const std::string& path);
 	void SetBackground(TBackGround* bg);
 

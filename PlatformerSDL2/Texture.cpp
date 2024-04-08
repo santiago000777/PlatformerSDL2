@@ -56,6 +56,10 @@ void TTexture::SetBackground(TBackGround* bg) {
 	this->background = bg;
 }
 
+void TTexture::SetWindowSize(SDL_Rect* rect) {
+	this->window = rect;
+}
+
 
 
 void TTexture::Render() {

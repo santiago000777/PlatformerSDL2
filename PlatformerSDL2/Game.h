@@ -27,14 +27,16 @@ public:
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	SDL_Rect* windowRect = new SDL_Rect();
 
 	TBackGround backGround;
 
 	std::vector<TGameObject*> objects;
 
 	const float deltaTime = 1000.0f / FPS;
-	std::chrono::time_point<std::chrono::high_resolution_clock> first, second;
-	std::chrono::milliseconds duration;
+	const float posunPeriod = deltaTime / 2;
+	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
+	std::chrono::milliseconds durationFrame, durationPosun;
 
 	SDL_Surface finalSurface;
 	SDL_Texture* finalTexture;
