@@ -33,6 +33,7 @@ void TGame::Loop() {
 	durationPosun = std::chrono::duration_cast<std::chrono::milliseconds>(secondPosun - firstPosun);
 	if (durationPosun.count() >= posunPeriod) {
 		firstPosun = std::chrono::high_resolution_clock::now();
+		
 		Posun();
 	}
 	else
@@ -55,35 +56,25 @@ void TGame::AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fro
 	object->SetWindowSize(windowRect);
 	std::cout << "Created Texture!" << std::endl;
 	objects.push_back(object);
+	
 }
 
-void TGame::AddTexture(TVec2 pos, TVec2 size, TColor&& color) {
-	TGameObject* object = new TGameObject(renderer, pos, size, &color);
-	object->SetWindowSize(windowRect);
-	std::cout << "Created Texture!" << std::endl;
-	objects.push_back(object);
-	delete object;
-	std::cout << "Deleted Texture!" << std::endl;
+void TGame::AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
+	player->Init(renderer, pos, size, path, fromXY, percentX, percentY);
+	player->SetWindowSize(windowRect);
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
 	backGround.Init(windowWidth, windowHeight, BGpath, renderer);
+	player->SetBackground(&backGround);
 	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->SetBackground(&backGround);
 	}
 }
 
-void TGame::SetBackGround(TColor&& color) {
-	TBackGround* bg = new TBackGround(windowWidth, windowHeight, color);
-	std::cout << "Created Texture!" << std::endl;
-	backGround = *bg;
-
-	for (int i = 0; i < objects.size(); i++) {
-		objects.at(i)->SetBackground(&backGround);
-	}
-}
 
 void TGame::Clear() {
+	player->texture.Clear();
 	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->texture.Clear();
 	}
@@ -91,6 +82,7 @@ void TGame::Clear() {
 
 void TGame::Render() {
 	SDL_BlitScaled(backGround.surface, NULL, &finalSurface, NULL);
+	SDL_BlitScaled(player->texture.GetSurface(), player->texture.GetSrcRect(), &this->finalSurface, player->texture.GetDstRect());
 	for (int i = 0; i < objects.size(); i++) {
 		SDL_BlitScaled(objects.at(i)->texture.GetSurface(), objects.at(i)->texture.GetSrcRect(), &this->finalSurface, objects.at(i)->texture.GetDstRect());
 	}
@@ -100,10 +92,38 @@ void TGame::Render() {
 	SDL_RenderCopy(renderer, finalTexture, 0, windowRect);
 	SDL_RenderPresent(renderer);
 	SDL_DestroyTexture(finalTexture);
+	
 }
 
 void TGame::Posun() {
+	player->KeyboardInput();
+	for (int i = 0; i < objects.size(); i++)
+		player->Posun(objects.at(i)->texture.GetDstRect(), objects.at(i)->GetVector());
+
 	for (int i = 0; i < objects.size(); i++) {
-		objects.at(i)->Posun();
+		objects.at(i)->Posun(player->texture.GetDstRect(), player->GetVector());
+	}
+}
+
+
+
+
+
+
+void TGame::AddTexture(TVec2 pos, TVec2 size, TColor&& color) {
+	TGameObject* object = new TGameObject(renderer, pos, size, &color);
+	object->SetWindowSize(windowRect);
+	std::cout << "Created Texture!" << std::endl;
+	objects.push_back(object);
+	delete object;
+	std::cout << "Deleted Texture!" << std::endl;
+}
+void TGame::SetBackGround(TColor&& color) {
+	TBackGround* bg = new TBackGround(windowWidth, windowHeight, color);
+	std::cout << "Created Texture!" << std::endl;
+	backGround = *bg;
+
+	for (int i = 0; i < objects.size(); i++) {
+		objects.at(i)->SetBackground(&backGround);
 	}
 }

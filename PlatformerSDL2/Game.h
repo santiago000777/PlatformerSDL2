@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Player.h"
 
 #define FPS		165
 
@@ -16,6 +16,7 @@ public:
 	void Loop();
 
 	void AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
+	void AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
 	void AddTexture(TVec2 pos, TVec2 size, TColor&& color);
 
 	void SetBackGround(const std::string& BGpath);
@@ -31,10 +32,11 @@ private:
 
 	TBackGround backGround;
 
+	TPlayer* player = new TPlayer();
 	std::vector<TGameObject*> objects;
 
 	const float deltaTime = 1000.0f / FPS;
-	const float posunPeriod = deltaTime / 2;
+	const float posunPeriod = deltaTime / 7;
 	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
 	std::chrono::milliseconds durationFrame, durationPosun;
 

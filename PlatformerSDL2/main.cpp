@@ -12,7 +12,8 @@ int main(int argc, char* args[]) {
 
 	
 
-	game->AddTexture({ 100, 200 }, { 100, 100 }, "Pictures/healer_f.bmp", {0, 0}, 0.33f, 0.25f);
+	game->AddPlayer({ 100, 200 }, { 100, 100 }, "Pictures/healer_f.bmp", {0, 0}, 0.33f, 0.25f);
+	game->AddTexture({ 300, 200 }, { 100, 100 }, "Pictures/veitImg.bmp", { 0, 0 }, 1.0f, 1.0f);
 	//game->AddTexture({ 100, 200 }, { 40, 40 }, { 127, 4, 0, 255 });
 	
 	//game->SetBackGround({ 0, 255, 0, 255 });
