@@ -2,6 +2,8 @@
 
 void TTexture::CreateTexture(SDL_Renderer* renderer, const std::string& path) {
 	surfacePicture = SDL_LoadBMP(path.c_str());
+	Uint32 transparentColor = SDL_MapRGBA(surfacePicture->format, 255, 255, 255, 0);
+	SDL_SetColorKey(surfacePicture, SDL_ENABLE, transparentColor);
 	//texturePicture = SDL_CreateTextureFromSurface(renderer, surfacePicture);
 	this->renderer = renderer;
 	
