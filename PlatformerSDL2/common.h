@@ -1,23 +1,23 @@
 #pragma once
 
-#include<iostream>
 #include <cmath>
-#include <string>       
-#include <windows.h>
-#include <winuser.h>
 #include <conio.h>  
-#include <stdlib.h>
-#include <dos.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <locale.h>
-#include <thread>
 #include <cstdlib>
 #include <cstring>
-#include <fstream>
-#include <random>
 #include <ctime>
+#include <dos.h>
+#include <fcntl.h>
+#include <fstream>
+#include<iostream>
+#include <locale.h>
 #include <map>
+#include <random>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>       
+#include <thread>
+#include <windows.h>
+#include <winuser.h>
 
 #define DEBUG()	if(GetAsyncKeyState(VK_ESCAPE)) {__debugbreak();}
 #define BREAK	__debugbreak
@@ -56,6 +56,33 @@ public:
 		this->y += vec.y;
 	}
 	TVec2& operator+(TVec2 vec) {
+		vec += *this;
+		return vec;
+	}
+};
+struct TVec4 {
+public:
+	int x, y, w, h;
+
+public:
+	TVec4(int x, int y, int w, int h) {
+		this->x = x;
+		this->y = y;
+		this->w = w;
+		this->h = h;
+	}
+	TVec4() {
+		x = 0;
+		y = 0;
+		w = 0;
+		h = 0;
+	}
+
+	void operator+=(const TVec4& vec) {
+		this->x += vec.x;
+		this->y += vec.y;
+	}
+	TVec4& operator+(TVec4 vec) {
 		vec += *this;
 		return vec;
 	}

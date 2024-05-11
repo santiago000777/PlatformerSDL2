@@ -37,9 +37,9 @@ void TGame::Loop() {
 		Posun();
 	}
 	else
-		std::cout << "Now, from POSUN\n";
+		//std::cout << "Now, from POSUN\n";
 	secondPosun = std::chrono::high_resolution_clock::now();
-
+	
 	durationFrame = std::chrono::duration_cast<std::chrono::milliseconds>(secondFrame - firstFrame);
 	if (durationFrame.count() >= deltaTime) {
 		firstFrame = std::chrono::high_resolution_clock::now();
@@ -47,14 +47,22 @@ void TGame::Loop() {
 		Render();
 	}
 	else
-		std::cout << "Now, from FRAME\n";
+		//std::cout << "Now, from FRAME\n";
 	secondFrame = std::chrono::high_resolution_clock::now();
+}
+
+void TGame::SetOtherObjects() {		/// TODO: Nastaveni dalsich prekazek musi probehnout az po pridani vsech objektu!
+
 }
 
 void TGame::AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	TGameObject* object = new TGameObject(renderer, pos, size, path, fromXY, percentX, percentY);
 	object->SetWindowSize(windowRect);
-	std::cout << "Created Texture!" << std::endl;
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->AddNewObject(*object->texture.GetDstRect(), *object->GetVector());
+		object->AddNewObject(*objects[i]->texture.GetDstRect(), *objects[i]->GetVector());
+	}
+
 	objects.push_back(object);
 	
 }
@@ -62,6 +70,10 @@ void TGame::AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fro
 void TGame::AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	player->Init(renderer, pos, size, path, fromXY, percentX, percentY);
 	player->SetWindowSize(windowRect);
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->AddNewObject(*player->texture.GetDstRect(), *player->GetVector());
+		player->AddNewObject(*objects[i]->texture.GetDstRect(), *objects[i]->GetVector());
+	}
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
@@ -97,11 +109,11 @@ void TGame::Render() {
 
 void TGame::Posun() {
 	player->KeyboardInput();
-	for (int i = 0; i < objects.size(); i++)
-		player->Posun(objects.at(i)->texture.GetDstRect(), objects.at(i)->GetVector());
+	player->Posun();
+	
 
 	for (int i = 0; i < objects.size(); i++) {
-		objects.at(i)->Posun(player->texture.GetDstRect(), player->GetVector());
+		objects.at(i)->Posun();
 	}
 }
 
@@ -127,3 +139,5 @@ void TGame::SetBackGround(TColor&& color) {
 		objects.at(i)->SetBackground(&backGround);
 	}
 }
+
+

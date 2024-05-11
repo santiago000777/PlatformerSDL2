@@ -21,6 +21,7 @@ public:
 
 	void SetBackGround(const std::string& BGpath);
 	void SetBackGround(TColor&& color);
+	void SetOtherObjects();
 
 	void Render();
 	void Clear();
@@ -36,7 +37,7 @@ private:
 	std::vector<TGameObject*> objects;
 
 	const float deltaTime = 1000.0f / FPS;
-	const float posunPeriod = deltaTime / 7;
+	const float posunPeriod = deltaTime / 16;
 	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
 	std::chrono::milliseconds durationFrame, durationPosun;
 

@@ -3,6 +3,7 @@
 void TTexture::CreateTexture(SDL_Renderer* renderer, const std::string& path) {
 	surfacePicture = SDL_LoadBMP(path.c_str());
 	Uint32 transparentColor = SDL_MapRGBA(surfacePicture->format, 255, 255, 255, 0);
+	//Uint32 transparentColor = SDL_MapRGBA(surfacePicture->format, 0, 0, 0, 0);
 	SDL_SetColorKey(surfacePicture, SDL_ENABLE, transparentColor);
 	//texturePicture = SDL_CreateTextureFromSurface(renderer, surfacePicture);
 	this->renderer = renderer;
@@ -101,11 +102,12 @@ SDL_Rect* TTexture::GetSrcRect() {
 }
 
 SDL_Rect* TTexture::GetDstRect() {
-	if (background->texture != NULL) {
+	/*if (background->texture != NULL) {
 		return &this->dstBox;
 	}
 	else
-		return NULL;
+		return NULL;*/
+	return &this->dstBox;
 }
 
 

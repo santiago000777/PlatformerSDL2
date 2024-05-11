@@ -7,7 +7,7 @@ public:
 
     }
     void KeyboardInput();
-
+    void AddObjects();
 private:
     enum eControls : short {
         UP = 'w',

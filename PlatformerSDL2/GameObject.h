@@ -1,5 +1,5 @@
 #pragma once
-#include "Texture.h"
+#include "SpriteSheet.h"
 
 class TGameObject
 {
@@ -19,29 +19,56 @@ public:
 
 	void SetBackground(TColor color);
 
+	void AddNewObject(const SDL_Rect& dstBox, const TVec2& vector);
+
 	TVec2* GetVector();
 
 	~TGameObject();
-	enum class eBodKolize : int {
+	
+	
+	void Posun(/*SDL_Rect* rect2, TVec2* posun2*/);
+	void Frame();
+
+private:
+	SDL_Rect srcBox;
+	/*enum class eKolize : int {
 		NONE = 0,
 		LEFT,
 		RIGHT,
 		UP,
 		DOWN
-	};
+	};*/
 	
-	void Posun(SDL_Rect* rect2, TVec2* posun2);
-	void Frame();
-
-private:
-	SDL_Rect srcBox;
-
+	enum eIndex : int {
+		LEFT = 0,
+		RIGHT,
+		UP,
+		DOWN
+	};
 protected:
 	SDL_Rect dstBox;
 	TVec2 vector;
-	eBodKolize posledniKolize;
+
+
+	
+	bool kolize[4];
+	
+
+	class TOtherObject {
+	public:
+		SDL_Rect dstBox;
+		TVec2 vector;
+	public:
+		TOtherObject(const SDL_Rect& dstBox, const TVec2& vector) {
+			this->dstBox = dstBox;
+			this->vector = vector;
+		}
+	};
+
+	std::vector<TOtherObject> otherObjects;
+	
 
 protected:
-	eBodKolize MistoKolize(SDL_Rect* rect2, TVec2* posun2);
+	void MistoKolize();
 };
 
