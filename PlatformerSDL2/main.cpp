@@ -18,16 +18,17 @@ int main(int argc, char* args[]) {
 	game->AddTexture({ 350, 50 }, { 30, 30 }, "Pictures/BallBmp.bmp", { 0, 0 }, 1.0f, 1.0f);*/
 	//game->AddTexture({ 300, 400 }, { 100, 24 }, "Pictures/paddle.bmp", { 0, 0 }, 1.0f, 1.0f);
 	game->AddTexture({ 300, 300 }, { 100, 24 }, "Pictures/paddle.bmp", { 0, 0 }, 1.0f, 1.0f);
-	game->AddTexture({ 600, 500 }, { 100, 24 }, "Pictures/paddle.bmp", { 0, 0 }, 1.0f, 1.0f);
+	game->AddTexture({ 500, 400 }, { 100, 24 }, "Pictures/paddle.bmp", { 0, 0 }, 1.0f, 1.0f);
 	//game->AddTexture({ 500, 400 }, { 100, 24 }, "Pictures/wall.bmp", { 0, 0 }, 1.0f, 1.0f);
 	//game->AddTexture({ 100, 200 }, { 40, 40 }, { 127, 4, 0, 255 });
 	
 	//game->SetBackGround({ 0, 255, 0, 255 });
 	game->SetBackGround("Pictures/veitImg.bmp");
 	
-	game->SetOtherObjects();
+	
 
 	while (!PressedKey(VK_SPACE)) {
+		game->SetInfoForEachObject();
 		game->Loop();
 	}
 	

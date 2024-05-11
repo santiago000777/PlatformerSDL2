@@ -37,7 +37,7 @@ void TGame::Loop() {
 		Posun();
 	}
 	else
-		//std::cout << "Now, from POSUN\n";
+		std::cout << "Now, from POSUN\n";
 	secondPosun = std::chrono::high_resolution_clock::now();
 	
 	durationFrame = std::chrono::duration_cast<std::chrono::milliseconds>(secondFrame - firstFrame);
@@ -47,33 +47,30 @@ void TGame::Loop() {
 		Render();
 	}
 	else
-		//std::cout << "Now, from FRAME\n";
+		std::cout << "Now, from FRAME\n";
 	secondFrame = std::chrono::high_resolution_clock::now();
 }
 
-void TGame::SetOtherObjects() {		/// TODO: Nastaveni dalsich prekazek musi probehnout az po pridani vsech objektu!
-
+void TGame::SetInfoForEachObject() {		/// TODO: Nastaveni dalsich prekazek musi probehnout az po pridani vsech objektu!
+	for (int k = 0; k < objects.size(); k++) {
+		for (int i = 0; i < objects.size(); i++) {
+			if (objects[k] == objects[i])
+				continue;
+			objects[k]->AddNewObject(*objects[i]->texture.GetDstRect(), *objects[i]->GetVector());
+		}
+	}
 }
 
 void TGame::AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	TGameObject* object = new TGameObject(renderer, pos, size, path, fromXY, percentX, percentY);
 	object->SetWindowSize(windowRect);
-	for (int i = 0; i < objects.size(); i++) {
-		objects[i]->AddNewObject(*object->texture.GetDstRect(), *object->GetVector());
-		object->AddNewObject(*objects[i]->texture.GetDstRect(), *objects[i]->GetVector());
-	}
-
 	objects.push_back(object);
-	
 }
 
 void TGame::AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	player->Init(renderer, pos, size, path, fromXY, percentX, percentY);
 	player->SetWindowSize(windowRect);
-	for (int i = 0; i < objects.size(); i++) {
-		objects[i]->AddNewObject(*player->texture.GetDstRect(), *player->GetVector());
-		player->AddNewObject(*objects[i]->texture.GetDstRect(), *objects[i]->GetVector());
-	}
+	objects.push_back(player);
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
