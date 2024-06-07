@@ -28,14 +28,12 @@ public:
 private:
 	SDL_Rect srcBox;
 	SDL_Rect dstBox;
-	SDL_Surface* surfacePicture;
+	SDL_Surface surfacePicture;
 	SDL_Texture* texturePicture;
 
 	SDL_Rect* window;
 
-	/*SDL_Surface* surfaceBackground;
-	SDL_Texture* textureBackground;*/
-	TBackGround *background;
+	TBackGround background;
 
 	SDL_Renderer* renderer;
 

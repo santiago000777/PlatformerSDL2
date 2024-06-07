@@ -62,45 +62,6 @@ void TGameObject::Posun(/*SDL_Rect* rect2, TVec2* posun2*/) {
 	
 	MistoKolize();
 
-	/*switch (posledniKolize) {
-		case eKolize::LEFT: {
-			std::cout << "LEFT\n";
-
-			if (this->vector.x > 0)
-				this->dstBox.x += this->vector.x;
-			this->dstBox.y += this->vector.y;
-			break;
-		}
-		case eKolize::RIGHT: {
-			std::cout << "RIGHT\n";
-
-			if (this->vector.x < 0)
-				this->dstBox.x += this->vector.x;
-			this->dstBox.y += this->vector.y;
-			break;
-		}
-		case eKolize::UP: {
-			std::cout << "UP\n";
-
-			if (this->vector.y > 0)
-				this->dstBox.y += this->vector.y;
-			this->dstBox.x += this->vector.x;
-			break;
-		}
-		case eKolize::DOWN: {
-			std::cout << "DOWN\n";
-
-			if (this->vector.y < 0)
-				this->dstBox.y += this->vector.y;
-			this->dstBox.x += this->vector.x;
-			break;
-		}
-		case eKolize::NONE: {
-			this->dstBox.x += vector.x;
-			this->dstBox.y += vector.y;
-			break;
-		}
-	}*/
 
 	//if (posledniKolize.x == eKolize::NONE) {	// TODO: Pridat kolize ze vsech stran (kdyz na nej bude neco padat a zaroven bude na zemi -> 2x kolize v ose Y) + Zmnenit kolize aby byly s timto pouzitelne
 	//	this->dstBox.x += vector.x;
@@ -119,9 +80,6 @@ void TGameObject::Posun(/*SDL_Rect* rect2, TVec2* posun2*/) {
 			this->dstBox.x += this->vector.x;
 		this->dstBox.y += this->vector.y;
 	}
-	/*if (posledniKolize.y == eKolize::NONE) {
-		this->dstBox.y += vector.y;
-	}*/
 	if (this->kolize[UP]) {
 		std::cout << "UP\n";
 
@@ -146,6 +104,7 @@ void TGameObject::Posun(/*SDL_Rect* rect2, TVec2* posun2*/) {
 }
 
 void TGameObject::MistoKolize() {
+	
 	for (int i = 0; i < otherObjects.size(); i++) {
 		
 		this->kolize[LEFT] = false;

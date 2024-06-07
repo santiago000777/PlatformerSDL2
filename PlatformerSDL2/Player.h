@@ -3,9 +3,7 @@
 class TPlayer :
     public TGameObject {
 public:
-    TPlayer() {
-
-    }
+    TPlayer() {}
     void KeyboardInput();
     void AddObjects();
 private:

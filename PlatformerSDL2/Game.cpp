@@ -1,14 +1,13 @@
 #include "Game.h"
 
-
 void TGame::InitWindow(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {
 	this->window = SDL_CreateWindow(windowName.c_str(), posX, posY, windowWidth, windowHeight, flags);
 	this->windowWidth = windowWidth;
 	this->windowHeight = windowHeight;
-	this->windowRect->x = 0;
-	this->windowRect->y = 0;
-	this->windowRect->w = windowWidth;
-	this->windowRect->h = windowHeight;
+	this->windowRect.x = 0;
+	this->windowRect.y = 0;
+	this->windowRect.w = windowWidth;
+	this->windowRect.h = windowHeight;
 }
 void TGame::InitRenderer(SDL_Window* window, int index, int flags) {
 	this->renderer = SDL_CreateRenderer(window, index, flags);
@@ -63,13 +62,13 @@ void TGame::SetInfoForEachObject() {		/// TODO: Nastaveni dalsich prekazek musi 
 
 void TGame::AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	TGameObject* object = new TGameObject(renderer, pos, size, path, fromXY, percentX, percentY);
-	object->SetWindowSize(windowRect);
+	object->SetWindowSize(&windowRect);
 	objects.push_back(object);
 }
 
 void TGame::AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY) {
 	player->Init(renderer, pos, size, path, fromXY, percentX, percentY);
-	player->SetWindowSize(windowRect);
+	player->SetWindowSize(&windowRect);
 	objects.push_back(player);
 }
 
@@ -90,15 +89,16 @@ void TGame::Clear() {
 }
 
 void TGame::Render() {
-	SDL_BlitScaled(backGround.surface, NULL, &finalSurface, NULL);
+	SDL_BlitScaled(&backGround.surface, NULL, &finalSurface, NULL);
 	SDL_BlitScaled(player->texture.GetSurface(), player->texture.GetSrcRect(), &this->finalSurface, player->texture.GetDstRect());
 	for (int i = 0; i < objects.size(); i++) {
 		SDL_BlitScaled(objects.at(i)->texture.GetSurface(), objects.at(i)->texture.GetSrcRect(), &this->finalSurface, objects.at(i)->texture.GetDstRect());
 	}
-	finalTexture = SDL_CreateTextureFromSurface(renderer, &this->finalSurface);
+	
 	
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, finalTexture, 0, windowRect);
+	finalTexture = SDL_CreateTextureFromSurface(renderer, &this->finalSurface);
+	SDL_RenderCopy(renderer, finalTexture, 0, &windowRect);
 	SDL_RenderPresent(renderer);
 	SDL_DestroyTexture(finalTexture);
 	
@@ -108,20 +108,15 @@ void TGame::Posun() {
 	player->KeyboardInput();
 	player->Posun();
 	
-
 	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->Posun();
 	}
 }
 
 
-
-
-
-
 void TGame::AddTexture(TVec2 pos, TVec2 size, TColor&& color) {
 	TGameObject* object = new TGameObject(renderer, pos, size, &color);
-	object->SetWindowSize(windowRect);
+	object->SetWindowSize(&windowRect);
 	std::cout << "Created Texture!" << std::endl;
 	objects.push_back(object);
 	delete object;
@@ -131,6 +126,7 @@ void TGame::SetBackGround(TColor&& color) {
 	TBackGround* bg = new TBackGround(windowWidth, windowHeight, color);
 	std::cout << "Created Texture!" << std::endl;
 	backGround = *bg;
+	delete bg;
 
 	for (int i = 0; i < objects.size(); i++) {
 		objects.at(i)->SetBackground(&backGround);

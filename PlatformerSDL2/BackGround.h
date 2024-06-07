@@ -15,7 +15,7 @@ public:
 public:
 	void Render();
 
-	SDL_Surface* surface;
+	SDL_Surface surface;
 	SDL_Texture* texture;
 	TColor bgColor;
 

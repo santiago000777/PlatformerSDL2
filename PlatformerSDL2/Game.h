@@ -1,35 +1,86 @@
-#pragma once
 #include "Player.h"
 
 #define FPS		165
 
-class TGame
-{
+class TGame {
 public:
 
 public:
-	
+
 	void Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags1);
-	
+
 	~TGame();
 
+	/// <summary>
+	/// Calculate and render a frame depends on Frequency
+	/// </summary>
 	void Loop();
 
+	/// <summary>
+	/// Create a new texture and stores it in vector objects
+	/// </summary>
+	/// <param name="pos">-> Position in the window</param>
+	/// <param name="size">-> Size in the window</param>
+	/// <param name="path">-> Path of a texture image</param>
+	/// <param name="fromXY">-> Image source box</param>
+	/// <param name="percentX">-> How many percent of the image will be visible (x axis)</param>
+	/// <param name="percentY">-> How many percent of the image will be visible (y axis)</param>
 	void AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
+	
+	/// <summary>
+	/// Create a new player and stores it in vector objects
+	/// </summary>
+	/// <param name="pos">-> Position in the window</param>
+	/// <param name="size">-> Size in the window</param>
+	/// <param name="path">-> Path of a texture image</param>
+	/// <param name="fromXY">-> Image source box</param>
+	/// <param name="percentX">-> How many percent of the image will be visible (x axis)</param>
+	/// <param name="percentY">-> How many percent of the image will be visible (y axis)</param>
 	void AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
+
+	/// <summary>
+	/// Create a new single-colored surface and stores it in vector objects
+	/// </summary>
+	/// <param name="pos">-> Position in the window</param>
+	/// <param name="size">-> Size in the window</param>
+	/// <param name="color">-> Sets a color of the surface</param>
 	void AddTexture(TVec2 pos, TVec2 size, TColor&& color);
 
+	/// <summary>
+	/// Sets a background as texture and in every object sets it as backround
+	/// </summary>
+	/// <param name="BGpath">-> Path of a texture image</param>
 	void SetBackGround(const std::string& BGpath);
+
+	/// <summary>
+	/// Sets a background as single-colored surface and in every object sets it as backround
+	/// </summary>
+	/// <param name="color">Color of the background</param>
 	void SetBackGround(TColor&& color);
+
+	/// <summary>
+	/// 
+	/// </summary>
 	void SetInfoForEachObject();
 
+	/// <summary>
+	/// Links every texture of an object into one final surface witch is rendered
+	/// </summary>
 	void Render();
+
+	/// <summary>
+	/// "Clears" Replace every texture of an object by a piece of the background
+	/// </summary>
 	void Clear();
+
+	/// <summary>
+	/// Shifts every object of a vector and checks collisions
+	/// </summary>
 	void Posun();
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	SDL_Rect* windowRect = new SDL_Rect();
+	SDL_Rect windowRect;
 
 	TBackGround backGround;
 
@@ -37,7 +88,7 @@ private:
 	std::vector<TGameObject*> objects;
 
 	const float deltaTime = 1000.0f / FPS;
-	const float posunPeriod = deltaTime / 24;
+	const float posunPeriod = 1000.0f / 9000;
 	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
 	std::chrono::milliseconds durationFrame, durationPosun;
 
