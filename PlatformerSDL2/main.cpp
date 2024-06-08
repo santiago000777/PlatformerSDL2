@@ -12,7 +12,7 @@ int main(int argc, char* args[]) {
 
 	
 	
-	game.AddPlayer({ 100, 200 }, { 100, 100 }, "Pictures/healer_f.bmp", {0, 0}, 0.33f, 0.25f);
+	game.AddPlayer({ 200, 100 }, { 100, 100 }, "Pictures/healer_f.bmp", {0, 0}, 0.33f, 0.25f);
 	/*game.AddTexture({ 300, 50 }, { 30, 27 }, "Pictures/BallBmp.bmp", { 0, 0 }, 1.0f, 1.0f);
 	game.AddTexture({ 400, 50 }, { 26, 30 }, "Pictures/BallBmp.bmp", { 0, 0 }, 1.0f, 1.0f);
 	game.AddTexture({ 350, 50 }, { 30, 30 }, "Pictures/BallBmp.bmp", { 0, 0 }, 1.0f, 1.0f);*/
@@ -29,7 +29,7 @@ int main(int argc, char* args[]) {
 	
 
 	while (!PressedKey(VK_SPACE)) {
-		game.SetInfoForEachObject();
+		//game.SetInfoForEachObject();
 		game.Loop();
 	}
 	

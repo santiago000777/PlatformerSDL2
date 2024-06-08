@@ -2,7 +2,6 @@
 
 TGameObject::TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY) {
 
-
 	dstBox.x = pos.x;
 	dstBox.y = pos.y;
 	dstBox.w = size.x;
@@ -54,47 +53,60 @@ TVec2* TGameObject::GetVector() {
 	return &vector;
 }
 
-void TGameObject::AddNewObject(const SDL_Rect& dstBox, const TVec2& vector) {
-	otherObjects.push_back(TOtherObject(dstBox, vector));
-}
-
-void TGameObject::Posun(/*SDL_Rect* rect2, TVec2* posun2*/) {
+void TGameObject::Posun(std::vector<TGameObject*>* otherObjects) {
 	
-	MistoKolize();
+	MistoKolize(otherObjects);
 
 
 	//if (posledniKolize.x == eKolize::NONE) {	// TODO: Pridat kolize ze vsech stran (kdyz na nej bude neco padat a zaroven bude na zemi -> 2x kolize v ose Y) + Zmnenit kolize aby byly s timto pouzitelne
 	//	this->dstBox.x += vector.x;
 	//}
 	if (this->kolize[LEFT]) {
-		std::cout << "LEFT\n";
 
-		if (this->vector.x > 0)
+		if (this->vector.x > 0 && !this->kolize[RIGHT])
 			this->dstBox.x += this->vector.x;
-		this->dstBox.y += this->vector.y;
+
+		if (this->vector.y < 0 && !this->kolize[UP]
+			|| this->vector.y > 0 && !this->kolize[DOWN]) {
+
+			this->dstBox.y += this->vector.y;
+		}
 	}
 	if (this->kolize[RIGHT]) {
-		std::cout << "RIGHT\n";
 
-		if (this->vector.x < 0)
+		if (this->vector.x < 0 && !this->kolize[LEFT]) {
 			this->dstBox.x += this->vector.x;
-		this->dstBox.y += this->vector.y;
+		}
+		if (this->vector.y < 0 && !this->kolize[UP]
+			|| this->vector.y > 0 && !this->kolize[DOWN]) {
+
+			this->dstBox.y += this->vector.y;
+		}
+		
 	}
 	if (this->kolize[UP]) {
-		std::cout << "UP\n";
 
-		if (this->vector.y > 0)
+		if (this->vector.y > 0 && !this->kolize[DOWN])
 			this->dstBox.y += this->vector.y;
-		this->dstBox.x += this->vector.x;
+
+		if (this->vector.x < 0 && !this->kolize[LEFT]
+			|| this->vector.x > 0 && !this->kolize[RIGHT]) {
+
+			this->dstBox.x += this->vector.x;
+		}
 	}
 	if (this->kolize[DOWN]) {
-		std::cout << "DOWN\n";
 
-		if (this->vector.y < 0)
+		if (this->vector.y < 0 && !this->kolize[UP])
 			this->dstBox.y += this->vector.y;
-		this->dstBox.x += this->vector.x;
+
+		if (this->vector.x < 0 && !this->kolize[LEFT]
+			|| this->vector.x > 0 && !this->kolize[RIGHT]) {
+
+			this->dstBox.x += this->vector.x;
+		}
 	}
-	else {
+	if(!this->kolize[LEFT] && !this->kolize[RIGHT] && !this->kolize[UP] && !this->kolize[DOWN]) {
 		this->dstBox.x += vector.x;
 		this->dstBox.y += vector.y;
 	}
@@ -103,47 +115,55 @@ void TGameObject::Posun(/*SDL_Rect* rect2, TVec2* posun2*/) {
 	this->texture.SetRenderBox(&this->dstBox);
 }
 
-void TGameObject::MistoKolize() {
+bool TGameObject::operator==(TGameObject obj) {
+	if (this->dstBox.x != obj.dstBox.x || this->dstBox.y != obj.dstBox.y
+		|| this->dstBox.w != obj.dstBox.w || this->dstBox.h != obj.dstBox.h) {
+
+		return false;
+	}
+	return true;
+}
+
+void TGameObject::MistoKolize(std::vector<TGameObject*>* otherObjects) {
 	
-	for (int i = 0; i < otherObjects.size(); i++) {
-		
-		this->kolize[LEFT] = false;
-		this->kolize[RIGHT] = false;
-		this->kolize[UP] = false;
-		this->kolize[DOWN] = false;
+	this->kolize[LEFT] = false;
+	this->kolize[RIGHT] = false;
+	this->kolize[UP] = false;
+	this->kolize[DOWN] = false;
+	
+	for (int i = 0; i < otherObjects->size(); i++) {
+		if (otherObjects->at(i) == this) {
+			continue;
+		}
 
-		if ((this->dstBox.x + this->vector.x + this->dstBox.w > otherObjects[i].dstBox.x && this->dstBox.x + this->vector.x < otherObjects[i].dstBox.x + otherObjects[i].dstBox.w)
-			&& (this->dstBox.y + this->vector.y + this->dstBox.h > otherObjects[i].dstBox.y && this->dstBox.y + this->vector.y < otherObjects[i].dstBox.y + otherObjects[i].dstBox.h)) {
+		if ((this->dstBox.x + this->vector.x + this->dstBox.w > otherObjects->at(i)->dstBox.x && this->dstBox.x + this->vector.x < otherObjects->at(i)->dstBox.x + otherObjects->at(i)->dstBox.w)
+			&& (this->dstBox.y + this->vector.y + this->dstBox.h > otherObjects->at(i)->dstBox.y && this->dstBox.y + this->vector.y < otherObjects->at(i)->dstBox.y + otherObjects->at(i)->dstBox.h)) {
 
-			if (this->vector.x > 0 && (this->dstBox.x + this->dstBox.w <= otherObjects[i].dstBox.x)) {
-				this->vector.x = otherObjects[i].dstBox.x - (this->dstBox.x + this->dstBox.w) + otherObjects[i].vector.x;
-				this->dstBox.x += this->vector.x;
+			if (this->vector.x > 0 && this->dstBox.x + this->dstBox.w >= otherObjects->at(i)->dstBox.x
+				&& this->dstBox.y < otherObjects->at(i)->dstBox.y + otherObjects->at(i)->dstBox.h && this->dstBox.y + this->dstBox.h > otherObjects->at(i)->dstBox.y) {
 
 				this->kolize[RIGHT] = true;
+				std::cout << "RIGHT\n";
 			}
-			if (this->vector.x < 0 && (this->dstBox.x >= otherObjects[i].dstBox.x + otherObjects[i].dstBox.w)) {
-				this->vector.x = this->dstBox.x - (otherObjects[i].dstBox.x + otherObjects[i].dstBox.w) - otherObjects[i].vector.x;
-				this->vector.x *= -1;
-				this->dstBox.x += this->vector.x;
+			if (this->vector.x < 0 && this->dstBox.x <= otherObjects->at(i)->dstBox.x + otherObjects->at(i)->dstBox.w
+				&& this->dstBox.y < otherObjects->at(i)->dstBox.y + otherObjects->at(i)->dstBox.h && this->dstBox.y + this->dstBox.h > otherObjects->at(i)->dstBox.y) {
 
 				this->kolize[LEFT] = true;
+				std::cout << "LEFT\n";
 			}
-			if (this->vector.y > 0 && (this->dstBox.y + this->dstBox.h <= otherObjects[i].dstBox.y)) {
-
-				this->vector.y = otherObjects[i].dstBox.y - (this->dstBox.y + this->dstBox.h) + otherObjects[i].vector.y;
-				this->dstBox.y += this->vector.y;
+			if (this->vector.y > 0 && this->dstBox.y + this->dstBox.h>= otherObjects->at(i)->dstBox.y
+				&& this->dstBox.x < otherObjects->at(i)->dstBox.x + otherObjects->at(i)->dstBox.w && this->dstBox.x + this->dstBox.w > otherObjects->at(i)->dstBox.x) {
 
 				this->kolize[DOWN] = true;
+				std::cout << "DOWN\n";
 			}
-			if (this->vector.y < 0 && (this->dstBox.y >= otherObjects[i].dstBox.y + otherObjects[i].dstBox.h)) {
-				this->vector.y = this->dstBox.y - (otherObjects[i].dstBox.y + otherObjects[i].dstBox.h) - otherObjects[i].vector.y;
-				this->vector.y *= -1;
-				this->dstBox.y += this->vector.y;
+			if (this->vector.y < 0 && this->dstBox.y <= otherObjects->at(i)->dstBox.y + otherObjects->at(i)->dstBox.h
+				&& this->dstBox.x < otherObjects->at(i)->dstBox.x + otherObjects->at(i)->dstBox.w && this->dstBox.x + this->dstBox.w > otherObjects->at(i)->dstBox.x) {
 
 				this->kolize[UP] = true;
+				std::cout << "UP\n";
 			}
 		}
 	}
-	
 }
 

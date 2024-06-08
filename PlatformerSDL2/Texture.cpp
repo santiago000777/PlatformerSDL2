@@ -112,6 +112,8 @@ SDL_Rect* TTexture::GetDstRect() {
 
 
 
+
+
 TTexture::~TTexture() {
 	SDL_FreeSurface(&surfacePicture);
 	//SDL_FreeSurface(background->surface);

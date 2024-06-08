@@ -24,6 +24,7 @@ public:
 	SDL_Rect* GetSrcRect();
 	SDL_Rect* GetDstRect();
 
+
 	~TTexture();
 private:
 	SDL_Rect srcBox;

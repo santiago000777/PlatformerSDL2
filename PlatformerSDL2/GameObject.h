@@ -19,15 +19,15 @@ public:
 
 	void SetBackground(TColor color);
 
-	void AddNewObject(const SDL_Rect& dstBox, const TVec2& vector);
 
 	TVec2* GetVector();
 
 	~TGameObject();
 	
 	
-	void Posun(/*SDL_Rect* rect2, TVec2* posun2*/);
+	void Posun(std::vector<TGameObject*>* otherObjects);
 	void Frame();
+	bool operator==(TGameObject obj);
 
 private:
 	SDL_Rect srcBox;
@@ -38,7 +38,7 @@ private:
 		UP,
 		DOWN
 	};*/
-	
+	bool pom = false;
 	enum eIndex : int {
 		LEFT = 0,
 		RIGHT,
@@ -65,10 +65,9 @@ protected:
 		}
 	};
 
-	std::vector<TOtherObject> otherObjects;
 	
 
 protected:
-	void MistoKolize();
+	void MistoKolize(std::vector<TGameObject*>* otherObjects);
 };
 
