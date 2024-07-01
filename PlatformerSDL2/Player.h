@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
-class TPlayer :
-    public TGameObject {
+class TPlayer : public TGameObject {
 public:
     TPlayer() {}
     void KeyboardInput();

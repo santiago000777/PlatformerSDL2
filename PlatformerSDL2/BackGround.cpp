@@ -36,23 +36,17 @@ void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* re
 
 	//bgColor = NULL;
 	this->renderer = renderer;
-	this->surface = *SDL_LoadBMP(path.c_str());
-	this->texture = SDL_CreateTextureFromSurface(renderer, &this->surface);
+	SDL_Surface* surface = SDL_LoadBMP(path.c_str());
+	this->texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
 }
 
 void TBackGround::SetRenderer(SDL_Renderer* renderer) {
 	this->renderer = renderer;
 }
 
-void TBackGround::Render() {
-	SDL_RenderClear(renderer);
-	if (this->texture != NULL) {
-		SDL_RenderCopy(renderer, this->texture, 0, &box);
-	}
-	else {
-		SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
-		SDL_RenderFillRect(renderer, &box); 
-	}
-	SDL_RenderPresent(renderer); 
 
+
+void TBackGround::Render(SDL_Surface* fSurface) {
+	SDL_BlitScaled(&surface, NULL, fSurface, NULL);
 }

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-#define FPS		165
+#define FPS		60
 
 class TGame {
 public:
@@ -84,7 +84,7 @@ private:
 
 	TBackGround backGround;
 
-	TPlayer* player = new TPlayer();
+	
 	std::vector<TGameObject*> objects;
 
 	const float deltaTime = 1000.0f / FPS;
@@ -93,7 +93,7 @@ private:
 	std::chrono::milliseconds durationFrame, durationPosun;
 
 	SDL_Surface finalSurface;
-	SDL_Texture* finalTexture;
+	
 	int windowWidth, windowHeight;
 
 private:

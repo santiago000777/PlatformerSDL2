@@ -1,16 +1,23 @@
 #include "Texture.h"
 
 void TTexture::CreateTexture(SDL_Renderer* renderer, const std::string& path) {
-	surfacePicture = *SDL_LoadBMP(path.c_str());
+	//SDL_Tex
+	try {
+		if (path.empty()) {
+			throw (std::string)"Textura nema prirazenou cestu, cesta je prazdna";
+		}
+		else if (SDL_LoadBMP(path.c_str()) == NULL) {
+			throw (std::string)"Nelze nalezt soubor s cestou na nastaveni obrazku Textury: " + path;
+		}
+		surfacePicture = *SDL_LoadBMP(path.c_str());
+	}
+	catch (const std::string& msg) {
+		std::cout << "Error: " << msg << "\n";
+	}
+	
 	Uint32 transparentColor = SDL_MapRGBA(surfacePicture.format, 255, 255, 255, 0);
-	//Uint32 transparentColor = SDL_MapRGBA(surfacePicture->format, 0, 0, 0, 0);
 	SDL_SetColorKey(&surfacePicture, SDL_ENABLE, transparentColor);
-	//texturePicture = SDL_CreateTextureFromSurface(renderer, surfacePicture);
 	this->renderer = renderer;
-	
-	
-
-	//renderSurfaceColor = NULL;
 }
 
 void TTexture::CreateTexture(SDL_Renderer* renderer, TColor* color) {
@@ -41,6 +48,16 @@ void TTexture::SetRenderBox(SDL_Rect* rect, TVec2 fromXY, float percentX, float 
 
 void TTexture::SetBackground(const std::string& path) {
 	this->background.Init(800, 600, path, this->renderer);
+	try {
+		if (SDL_LoadBMP(path.c_str()) == NULL) {
+			throw (std::string)"Nelze nalezt soubor s cestou na nastaveni obrazku Backgroundu: " + path;
+		}
+		surfacePicture = *SDL_LoadBMP(path.c_str());
+	}
+	catch (const std::string& msg) {
+		std::cout << "Error: " << msg << "\n";
+		BREAK();
+	}
 	if (!path.empty()) {
 		background.surface = *SDL_LoadBMP(path.c_str());
 		background.texture = SDL_CreateTextureFromSurface(renderer, &background.surface);

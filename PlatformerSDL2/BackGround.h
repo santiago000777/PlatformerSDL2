@@ -13,9 +13,9 @@ public:
 
 	void SetRenderer(SDL_Renderer* renderer);
 public:
-	void Render();
+	void Render(SDL_Surface* surface);
 
-	SDL_Surface surface;
+	
 	SDL_Texture* texture;
 	TColor bgColor;
 
