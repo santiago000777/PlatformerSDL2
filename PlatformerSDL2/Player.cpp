@@ -6,6 +6,10 @@ TPlayer::TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& pat
 	this->dstBox = dstBox;
 }
 
+TPlayer::~TPlayer() {
+	SDL_DestroyTexture(texture);
+}
+
 void TPlayer::KeyboardInput() {
 	vector.x = 0;
 	vector.y = 0;

@@ -25,6 +25,7 @@ TGame::~TGame() {
 		delete objects.at(i);
 		std::cout << "Deleted Object!" << std::endl;
 	}
+	
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 }
@@ -52,7 +53,7 @@ void TGame::Loop() {
 }
 
 void TGame::AddTexture(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) {
-	TGameObject* object = new TGameObject(renderer, dstBox, path, fromBox);
+	auto object = new TGameObject(renderer, dstBox, path, fromBox);
 	object->SetWindowSize(&windowRect);
 	objects.push_back(object);
 }
@@ -84,7 +85,6 @@ void TGame::Render() {
 	for (auto& object : objects) {
 		object->Render();
 	}
-	
 	SDL_RenderPresent(renderer);
 }
 

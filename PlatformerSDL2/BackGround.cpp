@@ -7,8 +7,9 @@ TBackGround::TBackGround(int width, int height, std::string path, SDL_Renderer* 
 	this->box.w = width;
 	this->box.h = height;*/
 
-	SDL_Surface* bSurface = SDL_LoadBMP(path.c_str());
-	texture = SDL_CreateTextureFromSurface(renderer, bSurface);
+	SDL_Surface* surface = SDL_LoadBMP(path.c_str());
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
 }
 
 void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* renderer) {
@@ -24,11 +25,13 @@ void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* re
 	SDL_FreeSurface(surface);
 }
 
+TBackGround::~TBackGround() {
+	SDL_DestroyTexture(texture);
+}
+
 void TBackGround::SetRenderer(SDL_Renderer* renderer) {
 	this->renderer = renderer;
 }
-
-
 
 void TBackGround::Render(SDL_Rect* windowRect) {
 		// Uprava pomoci SDL_RenderCopy() -> zavolani SDL_RenderPresent() na vykresleni naraz v Game.cpp
