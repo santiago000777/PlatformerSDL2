@@ -1,66 +1,46 @@
 #include "GameObject.h"
 
-TGameObject::TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY) {
 
-	dstBox.x = pos.x;
-	dstBox.y = pos.y;
-	dstBox.w = size.x;
-	dstBox.h = size.y;
-	this->texture.CreateTexture(renderer, path);
-	this->texture.SetRenderBox(&dstBox, fromXY, percentX, percentY);
+TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) 
+	: dstBox(dstBox), texture(TTexture::Create(renderer, path, fromBox)), renderer(renderer) {
+	
 }
 
-TGameObject::TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, TColor* color) {
-	dstBox.x = pos.x;
-	dstBox.y = pos.y;
-	dstBox.w = size.x;
-	dstBox.h = size.y;
-	this->texture.CreateTexture(renderer, color); 
-	this->texture.SetRenderBox(pos, size);
-}
-
-void TGameObject::Init(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY) {
-	dstBox.x = pos.x;
-	dstBox.y = pos.y;
-	dstBox.w = size.x;
-	dstBox.h = size.y;
-	this->texture.CreateTexture(renderer, path);
-	this->texture.SetRenderBox(&dstBox, fromXY, percentX, percentY);
+void TGameObject::Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) {
+	
+	this->texture = TTexture::Create(renderer, path, fromBox);
+	this->dstBox = dstBox;
+	this->renderer = renderer;
 }
 
 void TGameObject::SetBackground(const std::string& path) {
-	this->texture.SetBackground(path);
+	background = new TBackGround(1200, 600, path, renderer); // 800, 600
 }
 
 void TGameObject::SetWindowSize(SDL_Rect* rect) {
-	this->texture.SetWindowSize(rect);
-}
-
-void TGameObject::SetBackground(TColor color) {
-	this->texture.SetBackground(color);
+	windowRect = rect;
 }
 
 void TGameObject::SetBackground(TBackGround* bg) {
-	this->texture.SetBackground(bg);
+	background = bg;
 }
 
 TGameObject::~TGameObject() {
-	//delete texture;
+	SDL_DestroyTexture(texture);
 }
-
 
 TVec2* TGameObject::GetVector() {
 	return &vector;
 }
 
+void TGameObject::Render() {
+	SDL_RenderCopy(renderer, texture, NULL, &dstBox);
+}
+
 void TGameObject::Posun(std::vector<TGameObject*>* otherObjects) {
 	
 	MistoKolize(otherObjects);
-
-
-	//if (posledniKolize.x == eKolize::NONE) {	// TODO: Pridat kolize ze vsech stran (kdyz na nej bude neco padat a zaroven bude na zemi -> 2x kolize v ose Y) + Zmnenit kolize aby byly s timto pouzitelne
-	//	this->dstBox.x += vector.x;
-	//}
+	
 	if (this->kolize[LEFT]) {
 
 		if (this->vector.x > 0 && !this->kolize[RIGHT])
@@ -82,7 +62,6 @@ void TGameObject::Posun(std::vector<TGameObject*>* otherObjects) {
 
 			this->dstBox.y += this->vector.y;
 		}
-		
 	}
 	if (this->kolize[UP]) {
 
@@ -110,9 +89,10 @@ void TGameObject::Posun(std::vector<TGameObject*>* otherObjects) {
 		this->dstBox.x += vector.x;
 		this->dstBox.y += vector.y;
 	}
-	
+}
 
-	this->texture.SetRenderBox(&this->dstBox);
+void TGameObject::Clear() {
+	SDL_RenderCopy(renderer, background->texture, &srcBox, &dstBox);
 }
 
 bool TGameObject::operator==(TGameObject obj) {

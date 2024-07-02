@@ -1,5 +1,11 @@
 #include "Player.h"
 
+TPlayer::TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect from) {
+	
+	this->texture = TTexture::Create(renderer, path, from);
+	this->dstBox = dstBox;
+}
+
 void TPlayer::KeyboardInput() {
 	vector.x = 0;
 	vector.y = 0;

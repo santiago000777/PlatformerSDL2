@@ -4,69 +4,44 @@
 class TGameObject
 {
 public:
-	TTexture texture;
-
+	
 public:
 	TGameObject() = default;
-	TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY);
-	void Init(SDL_Renderer* renderer, TVec2 pos, TVec2 size, std::string path, TVec2 fromXY, float percentX, float percentY);
-	TGameObject(SDL_Renderer* renderer, TVec2 pos, TVec2 size, TColor* color);
+	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox);
+	void Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
+	bool operator==(TGameObject obj);
+	~TGameObject();
 
 	void SetWindowSize(SDL_Rect* rect);
 	void SetBackground(const std::string& path);
 	void SetBackground(TBackGround* bg);
 
-
-	void SetBackground(TColor color);
-
-
 	TVec2* GetVector();
 
-	~TGameObject();
-	
-	
+	void Render();
 	void Posun(std::vector<TGameObject*>* otherObjects);
-	void Frame();
-	bool operator==(TGameObject obj);
+	void Clear();
 
 private:
-	SDL_Rect srcBox;
-	/*enum class eKolize : int {
-		NONE = 0,
-		LEFT,
-		RIGHT,
-		UP,
-		DOWN
-	};*/
-	bool pom = false;
+	SDL_Rect* windowRect;
+	TBackGround* background;
+	SDL_Renderer* renderer;
+
 	enum eIndex : int {
 		LEFT = 0,
 		RIGHT,
 		UP,
 		DOWN
 	};
+
 protected:
-	SDL_Rect dstBox;
+	SDL_Texture* texture;
 	TVec2 vector;
+	SDL_Rect dstBox;
+	SDL_Rect srcBox;
 
-
-	
 	bool kolize[4];
 	
-
-	class TOtherObject {
-	public:
-		SDL_Rect dstBox;
-		TVec2 vector;
-	public:
-		TOtherObject(const SDL_Rect& dstBox, const TVec2& vector) {
-			this->dstBox = dstBox;
-			this->vector = vector;
-		}
-	};
-
-	
-
 protected:
 	void MistoKolize(std::vector<TGameObject*>* otherObjects);
 };

@@ -25,7 +25,8 @@ public:
 	/// <param name="fromXY">-> Image source box</param>
 	/// <param name="percentX">-> How many percent of the image will be visible (x axis)</param>
 	/// <param name="percentY">-> How many percent of the image will be visible (y axis)</param>
-	void AddTexture(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
+	void AddTexture(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
+	
 	
 	/// <summary>
 	/// Create a new player and stores it in vector objects
@@ -36,15 +37,8 @@ public:
 	/// <param name="fromXY">-> Image source box</param>
 	/// <param name="percentX">-> How many percent of the image will be visible (x axis)</param>
 	/// <param name="percentY">-> How many percent of the image will be visible (y axis)</param>
-	void AddPlayer(TVec2 pos, TVec2 size, const std::string& path, TVec2 fromXY, float percentX, float percentY);
+	void AddPlayer(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
 
-	/// <summary>
-	/// Create a new single-colored surface and stores it in vector objects
-	/// </summary>
-	/// <param name="pos">-> Position in the window</param>
-	/// <param name="size">-> Size in the window</param>
-	/// <param name="color">-> Sets a color of the surface</param>
-	void AddTexture(TVec2 pos, TVec2 size, TColor&& color);
 
 	/// <summary>
 	/// Sets a background as texture and in every object sets it as backround
@@ -52,16 +46,6 @@ public:
 	/// <param name="BGpath">-> Path of a texture image</param>
 	void SetBackGround(const std::string& BGpath);
 
-	/// <summary>
-	/// Sets a background as single-colored surface and in every object sets it as backround
-	/// </summary>
-	/// <param name="color">Color of the background</param>
-	void SetBackGround(TColor&& color);
-
-	/// <summary>
-	/// 
-	/// </summary>
-	void SetInfoForEachObject();
 
 	/// <summary>
 	/// Links every texture of an object into one final surface witch is rendered
@@ -91,8 +75,6 @@ private:
 	const float posunPeriod = 1000.0f / 9000;
 	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
 	std::chrono::milliseconds durationFrame, durationPosun;
-
-	SDL_Surface finalSurface;
 	
 	int windowWidth, windowHeight;
 
