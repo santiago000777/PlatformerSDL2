@@ -18,7 +18,6 @@ void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* re
 	this->box.w = width;
 	this->box.h = height;
 
-	//bgColor = NULL;
 	this->renderer = renderer;
 	SDL_Surface* surface = SDL_LoadBMP(path.c_str());
 	this->texture = SDL_CreateTextureFromSurface(renderer, surface);

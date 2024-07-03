@@ -21,8 +21,8 @@ void TGame::Init(const std::string& windowName, int posX, int posY, int windowWi
 }
 
 TGame::~TGame() {
-	for (int i = 0; i < objects.size(); i++) {
-		delete objects.at(i);
+	for (auto& object : objects) {
+		delete object;
 		std::cout << "Deleted Object!" << std::endl;
 	}
 	
@@ -66,9 +66,8 @@ void TGame::AddPlayer(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox
 
 void TGame::SetBackGround(const std::string& BGpath) {
 	backGround.Init(windowWidth, windowHeight, BGpath, renderer);
-	//player->SetBackground(&backGround);
-	for (int i = 0; i < objects.size(); i++) {
-		objects.at(i)->SetBackground(&backGround);
+	for (auto& object : objects) {
+		object->SetBackground(&backGround);
 	}
 }
 
@@ -85,14 +84,14 @@ void TGame::Render() {
 	for (auto& object : objects) {
 		object->Render();
 	}
+
 	SDL_RenderPresent(renderer);
 }
 
 void TGame::Posun() {
-	//player->KeyboardInput();
-	//player->Posun(&objects);
 	
-	for (int i = 0; i < objects.size(); i++) {
-		objects[i]->Posun(&objects);
+	for (auto& object : objects) {
+		object->HandleEvents();
+		object->Posun(&objects);
 	}
 }

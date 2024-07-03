@@ -19,13 +19,13 @@ public:
 	TVec2* GetVector();
 
 	void Render();
+	virtual void HandleEvents();
 	void Posun(std::vector<TGameObject*>* otherObjects);
 	void Clear();
 
 private:
 	SDL_Rect* windowRect;
 	TBackGround* background;
-	SDL_Renderer* renderer;
 
 	enum eIndex : int {
 		LEFT = 0,
@@ -35,6 +35,7 @@ private:
 	};
 
 protected:
+	SDL_Renderer* renderer;
 	SDL_Texture* texture;
 	TVec2 vector;
 	SDL_Rect dstBox;

@@ -2,14 +2,15 @@
 
 
 TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) 
-	: dstBox(dstBox), texture(TTexture::Create(renderer, path, fromBox)), renderer(renderer) {
+	: dstBox(dstBox), texture(TTexture::Create(renderer, path)), renderer(renderer), srcBox(fromBox) {
 	
 }
 
 void TGameObject::Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) {
 	
-	this->texture = TTexture::Create(renderer, path, fromBox);
+	this->texture = TTexture::Create(renderer, path);
 	this->dstBox = dstBox;
+	this->srcBox = fromBox;
 	this->renderer = renderer;
 }
 
@@ -34,7 +35,11 @@ TVec2* TGameObject::GetVector() {
 }
 
 void TGameObject::Render() {
-	SDL_RenderCopy(renderer, texture, NULL, &dstBox);
+	SDL_RenderCopy(renderer, texture, &srcBox, &dstBox); // NULL -> pro cely obr.
+}
+
+void TGameObject::HandleEvents() {
+	vector = { 0, 0 };
 }
 
 void TGameObject::Posun(std::vector<TGameObject*>* otherObjects) {
