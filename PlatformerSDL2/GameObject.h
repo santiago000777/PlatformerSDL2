@@ -6,7 +6,7 @@ class TGameObject
 public:
 	
 public:
-	TGameObject() = default;
+	//TGameObject() = default;
 	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox);
 	void Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
 	bool operator==(TGameObject obj);
@@ -15,8 +15,6 @@ public:
 	void SetWindowSize(SDL_Rect* rect);
 	void SetBackground(const std::string& path);
 	void SetBackground(TBackGround* bg);
-
-	TVec2* GetVector();
 
 	void Render();
 	virtual void HandleEvents();

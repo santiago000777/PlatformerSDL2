@@ -14,7 +14,5 @@ private:
         DOWN = 's',
         RIGHT = 'd'
     };
-
-
 };
 

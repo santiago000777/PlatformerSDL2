@@ -30,10 +30,6 @@ TGameObject::~TGameObject() {
 	SDL_DestroyTexture(texture);
 }
 
-TVec2* TGameObject::GetVector() {
-	return &vector;
-}
-
 void TGameObject::Render() {
 	SDL_RenderCopy(renderer, texture, &srcBox, &dstBox); // NULL -> pro cely obr.
 }

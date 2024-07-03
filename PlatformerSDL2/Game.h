@@ -6,7 +6,6 @@ class TGame {
 public:
 
 public:
-
 	void Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags1);
 
 	~TGame();
@@ -61,14 +60,13 @@ public:
 	/// Shifts every object of a vector and checks collisions
 	/// </summary>
 	void Posun();
+
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Rect windowRect;
-
 	TBackGround backGround;
 
-	
 	std::vector<TGameObject*> objects;
 
 	const float deltaTime = 1000.0f / FPS;
@@ -79,7 +77,6 @@ private:
 	int windowWidth, windowHeight;
 
 private:
-
 	void InitWindow(const std::string& windowName = "Window", int posX = SDL_WINDOWPOS_CENTERED,
 		int posY = SDL_WINDOWPOS_CENTERED, int windowWidth = 800, int windowHeight = 600, int flags = SDL_WINDOW_SHOWN);
 	void InitRenderer(SDL_Window* window, int index = -1, int flags = 1);

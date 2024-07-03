@@ -37,8 +37,6 @@ void TGame::Loop() {
 		
 		Posun();
 	}
-	else
-		//std::cout << "Now, from POSUN\n";
 	secondPosun = std::chrono::high_resolution_clock::now();
 	
 	durationFrame = std::chrono::duration_cast<std::chrono::milliseconds>(secondFrame - firstFrame);
@@ -47,8 +45,6 @@ void TGame::Loop() {
 		Clear();
 		Render();
 	}
-	else
-		//std::cout << "Now, from FRAME\n";
 	secondFrame = std::chrono::high_resolution_clock::now();
 }
 
@@ -89,7 +85,6 @@ void TGame::Render() {
 }
 
 void TGame::Posun() {
-	
 	for (auto& object : objects) {
 		object->HandleEvents();
 		object->Posun(&objects);

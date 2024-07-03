@@ -2,10 +2,6 @@
 
 TBackGround::TBackGround(int width, int height, std::string path, SDL_Renderer* renderer) 
 	: box{0, 0, width, height}, renderer(renderer) {
-	/*this->box.x = 0;
-	this->box.y = 0;
-	this->box.w = width;
-	this->box.h = height;*/
 
 	SDL_Surface* surface = SDL_LoadBMP(path.c_str());
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -26,10 +22,6 @@ void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* re
 
 TBackGround::~TBackGround() {
 	SDL_DestroyTexture(texture);
-}
-
-void TBackGround::SetRenderer(SDL_Renderer* renderer) {
-	this->renderer = renderer;
 }
 
 void TBackGround::Render(SDL_Rect* windowRect) {
