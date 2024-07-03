@@ -6,7 +6,7 @@ class TGameObject
 public:
 	
 public:
-	//TGameObject() = default;
+	TGameObject() = default;
 	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox);
 	void Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
 	bool operator==(TGameObject obj);
@@ -39,6 +39,7 @@ protected:
 	SDL_Rect dstBox;
 	SDL_Rect srcBox;
 
+	int pom = 4;
 	bool kolize[4];
 	
 protected:

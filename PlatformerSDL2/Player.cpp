@@ -3,14 +3,10 @@
 TPlayer::TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect from) 
 	: TGameObject(renderer, dstBox, path, from) {
 	
-	/*this->texture = TTexture::Create(renderer, path);
-	this->dstBox = dstBox;
-	this->srcBox = from;
-	this->renderer = renderer;*/
 }
 
 TPlayer::~TPlayer() {
-	SDL_DestroyTexture(texture);
+
 }
 
 void TPlayer::HandleEvents() {
