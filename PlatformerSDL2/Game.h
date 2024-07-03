@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// Shifts every object of a vector and checks collisions
 	/// </summary>
-	void Posun();
+	void Posun(float delta);
 
 private:
 	SDL_Window* window;

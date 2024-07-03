@@ -39,13 +39,14 @@ void TGame::Loop() {
 	if (durationPosun.count() >= posunPeriod) {
 		firstPosun = std::chrono::high_resolution_clock::now();
 		
-		Posun();
+		Posun(durationPosun.count()*10);
 	}
 	secondPosun = std::chrono::high_resolution_clock::now();
 	
 	durationFrame = std::chrono::duration_cast<std::chrono::milliseconds>(secondFrame - firstFrame);
 	if (durationFrame.count() >= deltaTime) {
 		firstFrame = std::chrono::high_resolution_clock::now();
+
 		Clear();
 		Render();
 	}
@@ -65,7 +66,7 @@ void TGame::AddPlayer(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
-	backGround.Init(windowRect.w, windowRect.h, BGpath, renderer); // 
+	backGround.Init(windowRect.w, windowRect.h, BGpath, renderer);
 	for (auto& object : objects) {
 		object->SetBackground(&backGround);
 	}
@@ -88,9 +89,9 @@ void TGame::Render() {
 	SDL_RenderPresent(renderer);
 }
 
-void TGame::Posun() {
+void TGame::Posun(float delta) {
 	for (auto& object : objects) {
 		object->HandleEvents();
-		object->Posun(&objects);
+		object->Posun(&objects, delta);
 	}
 }

@@ -2,7 +2,6 @@
 #include "GameObject.h"
 class TPlayer : public TGameObject {
 public:
-    TPlayer() {}
     TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect from);
     ~TPlayer();
 

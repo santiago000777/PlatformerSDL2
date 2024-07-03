@@ -59,6 +59,7 @@ public:
 		vec += *this;
 		return vec;
 	}
+	
 };
 struct TVec4 {
 public:
