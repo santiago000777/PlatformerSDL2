@@ -1,14 +1,12 @@
 #include "Game.h"
-
-
 /* 
-	1. "Solution Platforms" -> x64
+	1. "Active solution platform" -> x64
 */
 
 int main(int argc, char* args[]) {
 	
-	TGame game;
-	game.Init("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN);
+	TGame game("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN);
+	//game.Init("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN);
 	
 	game.AddPlayer({ 300, 190, 100, 100 }, "Pictures/healer_f.bmp", {0, 0, 32, 36});
 	game.AddTexture({ 300, 300, 100, 24 }, "Pictures/healer_f.bmp", { 0, 0, 32, 36 });

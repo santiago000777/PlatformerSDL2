@@ -2,8 +2,6 @@
 
 void TGame::InitWindow(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {
 	this->window = SDL_CreateWindow(windowName.c_str(), posX, posY, windowWidth, windowHeight, flags);
-	this->windowWidth = windowWidth;
-	this->windowHeight = windowHeight;
 	this->windowRect.x = 0;
 	this->windowRect.y = 0;
 	this->windowRect.w = windowWidth;
@@ -14,9 +12,15 @@ void TGame::InitRenderer(SDL_Window* window, int index, int flags) {
 	this->renderer = SDL_CreateRenderer(window, index, flags);
 }
 
-void TGame::Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags1) {
+TGame::TGame(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	InitWindow(windowName, posX, posY, windowWidth, windowHeight, flags1);
+	InitWindow(windowName, posX, posY, windowWidth, windowHeight, flags);
+	InitRenderer(window);
+}
+
+void TGame::Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {
+	SDL_Init(SDL_INIT_EVERYTHING);
+	InitWindow(windowName, posX, posY, windowWidth, windowHeight, flags);
 	InitRenderer(window);
 }
 
@@ -61,7 +65,7 @@ void TGame::AddPlayer(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox
 }
 
 void TGame::SetBackGround(const std::string& BGpath) {
-	backGround.Init(windowWidth, windowHeight, BGpath, renderer);
+	backGround.Init(windowRect.w, windowRect.h, BGpath, renderer); // 
 	for (auto& object : objects) {
 		object->SetBackground(&backGround);
 	}

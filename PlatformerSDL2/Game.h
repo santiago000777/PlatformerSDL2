@@ -6,7 +6,8 @@ class TGame {
 public:
 
 public:
-	void Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags1);
+	TGame(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags);
+	void Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags);
 
 	~TGame();
 
@@ -74,7 +75,7 @@ private:
 	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
 	std::chrono::milliseconds durationFrame, durationPosun;
 	
-	int windowWidth, windowHeight;
+	
 
 private:
 	void InitWindow(const std::string& windowName = "Window", int posX = SDL_WINDOWPOS_CENTERED,
