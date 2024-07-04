@@ -97,7 +97,7 @@ bool TGameObject::operator==(TGameObject obj) {
 	return true;
 }
 
-void TGameObject::MistoKolize(std::vector<TGameObject*>* otherObjects, float delta) {
+void TGameObject::MistoKolize(std::vector<TGameObject*>* otherObjects, float delta) { // zprovoznit s deltou
 
 	this->kolize[LEFT] = false;
 	this->kolize[RIGHT] = false;

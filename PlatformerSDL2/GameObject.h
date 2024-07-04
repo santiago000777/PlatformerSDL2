@@ -17,6 +17,7 @@ public:
 		// move prirazeni
 	void operator=(TGameObject&& rhs);
 
+
 	bool operator==(TGameObject obj);
 
 	void SetBackground(TBackGround* bg);

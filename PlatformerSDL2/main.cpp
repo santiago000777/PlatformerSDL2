@@ -26,5 +26,6 @@ int main(int argc, char* args[]) {
 		game.Loop();
 	}
 	
+		// opravit vraceni u drzeni left i right nebo up i down klavesy
 	return 0;
 }
