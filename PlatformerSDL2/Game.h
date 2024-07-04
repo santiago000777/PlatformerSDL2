@@ -5,7 +5,6 @@
 class TGame {
 public:
 	TGame(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags);
-	void Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags);
 
 	~TGame();
 
@@ -44,22 +43,6 @@ public:
 	/// <param name="BGpath">-> Path of a texture image</param>
 	void SetBackGround(const std::string& BGpath);
 
-
-	/// <summary>
-	/// Links every texture of an object into one final surface witch is rendered
-	/// </summary>
-	void Render();
-
-	/// <summary>
-	/// "Clears" Replace every texture of an object by a piece of the background
-	/// </summary>
-	void Clear();
-
-	/// <summary>
-	/// Shifts every object of a vector and checks collisions
-	/// </summary>
-	void Posun(float delta);
-
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
@@ -79,5 +62,20 @@ private:
 	void InitWindow(const std::string& windowName = "Window", int posX = SDL_WINDOWPOS_CENTERED,
 		int posY = SDL_WINDOWPOS_CENTERED, int windowWidth = 800, int windowHeight = 600, int flags = SDL_WINDOW_SHOWN);
 	void InitRenderer(SDL_Window* window, int index = -1, int flags = 1);
+
+	/// <summary>
+	/// Links every texture of an object into one final surface witch is rendered
+	/// </summary>
+	void Render();
+
+	/// <summary>
+	/// "Clears" Replace every texture of an object by a piece of the background
+	/// </summary>
+	void Clear();
+
+	/// <summary>
+	/// Shifts every object of a vector and checks collisions
+	/// </summary>
+	void Posun(float delta);
 };
 

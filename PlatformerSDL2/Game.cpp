@@ -18,12 +18,6 @@ TGame::TGame(const std::string& windowName, int posX, int posY, int windowWidth,
 	InitRenderer(window);
 }
 
-void TGame::Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	InitWindow(windowName, posX, posY, windowWidth, windowHeight, flags);
-	InitRenderer(window);
-}
-
 TGame::~TGame() {
 	for (auto& object : objects) {
 		delete object;
@@ -54,13 +48,11 @@ void TGame::Loop() {
 
 void TGame::AddTexture(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) {
 	auto object = new TGameObject(renderer, dstBox, path, fromBox, windowRect);
-	//object->SetWindowSize(&windowRect);
 	objects.push_back(object);
 }
 
 void TGame::AddPlayer(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) {
 	auto player = new TPlayer(renderer, dstBox, path, fromBox, windowRect);
-	//player->SetWindowSize(&windowRect);
 	objects.push_back(player);
 }
 
@@ -69,7 +61,6 @@ void TGame::SetBackGround(const std::string& BGpath) {
 	for (auto& object : objects) {
 		object->SetBackground(backGround);
 	}
-	
 }
 
 void TGame::Clear() {

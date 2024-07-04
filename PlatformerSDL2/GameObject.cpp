@@ -5,7 +5,6 @@ TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::str
 	texture = TTexture::Create(renderer, path);
 }
 
-
 void TGameObject::SetBackground(TBackGround* bg) {
 	background = bg;
 }
