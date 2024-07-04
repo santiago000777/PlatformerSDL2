@@ -4,8 +4,6 @@
 
 class TGame {
 public:
-
-public:
 	TGame(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags);
 	void Init(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags);
 

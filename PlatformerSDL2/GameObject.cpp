@@ -1,6 +1,5 @@
 #include "GameObject.h"
 
-
 TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) 
 	: dstBox(dstBox), texture(TTexture::Create(renderer, path)), renderer(renderer), srcBox(fromBox) {
 	
@@ -28,6 +27,14 @@ void TGameObject::SetBackground(TBackGround* bg) {
 
 TGameObject::~TGameObject() {
 	SDL_DestroyTexture(texture);
+}
+
+void TGameObject::operator=(const TGameObject& rhs) {
+	BREAK();
+}
+
+void TGameObject::operator=(TGameObject&& rhs) {
+	BREAK();
 }
 
 void TGameObject::Render() {

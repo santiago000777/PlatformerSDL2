@@ -39,7 +39,7 @@ void TGame::Loop() {
 	if (durationPosun.count() >= posunPeriod) {
 		firstPosun = std::chrono::high_resolution_clock::now();
 		
-		Posun(durationPosun.count()*10);
+		Posun(/*durationPosun.count()**/1/*0*/);
 	}
 	secondPosun = std::chrono::high_resolution_clock::now();
 	

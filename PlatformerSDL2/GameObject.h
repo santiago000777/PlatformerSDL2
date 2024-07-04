@@ -10,8 +10,14 @@ public:
 	~des
 	*/
 	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox);
+	TGameObject(const TGameObject& rhs) = delete;
+	TGameObject(TGameObject&& rhs) = delete;
 	~TGameObject();
+	void operator=(const TGameObject& rhs);
+	void operator=(TGameObject&& rhs);
+
 	void Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
+
 	bool operator==(TGameObject obj);
 
 	void SetWindowSize(SDL_Rect* rect);

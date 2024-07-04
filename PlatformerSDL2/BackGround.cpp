@@ -8,6 +8,13 @@ TBackGround::TBackGround(int width, int height, std::string path, SDL_Renderer* 
 	SDL_FreeSurface(surface);
 }
 
+void TBackGround::operator=(const TBackGround& rhs) {
+	BREAK();
+}
+void TBackGround::operator=(TBackGround&& rhs) {
+	BREAK();
+}
+
 void TBackGround::Init(int width, int height, std::string path, SDL_Renderer* renderer) {
 	this->box.x = 0;
 	this->box.y = 0;

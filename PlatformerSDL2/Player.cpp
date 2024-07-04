@@ -5,6 +5,13 @@ TPlayer::TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& pat
 	
 }
 
+void TPlayer::operator=(const TPlayer& rhs) {
+	BREAK();
+}
+void TPlayer::operator=(TPlayer&& rhs) {
+	BREAK();
+}
+
 TPlayer::~TPlayer() {
 
 }
