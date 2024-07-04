@@ -4,16 +4,17 @@
 class TGameObject
 {
 public:
-	/*
-	copy ctor
-	op=
-	~des
-	*/
+		// ctor s parametry
 	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox, SDL_Rect windowRect);
+		// copy ctor (zakazany)
 	TGameObject(const TGameObject& rhs) = delete;
+		// move ctor (zakazany)
 	TGameObject(TGameObject&& rhs) = delete;
+		// Destructor
 	~TGameObject();
+		// copy prirazeni
 	void operator=(const TGameObject& rhs);
+		// move prirazeni
 	void operator=(TGameObject&& rhs);
 
 	bool operator==(TGameObject obj);
