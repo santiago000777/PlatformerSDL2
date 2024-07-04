@@ -1,25 +1,10 @@
 #include "GameObject.h"
 
-TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) 
-	: dstBox(dstBox), texture(TTexture::Create(renderer, path)), renderer(renderer), srcBox(fromBox) {
-	
+TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox, SDL_Rect windowRect)
+	: dstBox(dstBox), renderer(renderer), srcBox(fromBox), windowRect(windowRect) {
+	texture = TTexture::Create(renderer, path);
 }
 
-void TGameObject::Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox) {
-	
-	this->texture = TTexture::Create(renderer, path);
-	this->dstBox = dstBox;
-	this->srcBox = fromBox;
-	this->renderer = renderer;
-}
-
-void TGameObject::SetBackground(const std::string& path) {
-	background = new TBackGround(1200, 600, path, renderer); // 800, 600
-}
-
-void TGameObject::SetWindowSize(SDL_Rect* rect) {
-	windowRect = rect;
-}
 
 void TGameObject::SetBackground(TBackGround* bg) {
 	background = bg;
@@ -27,6 +12,7 @@ void TGameObject::SetBackground(TBackGround* bg) {
 
 TGameObject::~TGameObject() {
 	SDL_DestroyTexture(texture);
+	std::cout << "Deleted Object!" << std::endl;
 }
 
 void TGameObject::operator=(const TGameObject& rhs) {

@@ -9,19 +9,15 @@ public:
 	op=
 	~des
 	*/
-	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox);
+	TGameObject(SDL_Renderer* renderer, SDL_Rect destBox, const std::string& path, SDL_Rect fromBox, SDL_Rect windowRect);
 	TGameObject(const TGameObject& rhs) = delete;
 	TGameObject(TGameObject&& rhs) = delete;
 	~TGameObject();
 	void operator=(const TGameObject& rhs);
 	void operator=(TGameObject&& rhs);
 
-	void Init(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
-
 	bool operator==(TGameObject obj);
 
-	void SetWindowSize(SDL_Rect* rect);
-	void SetBackground(const std::string& path);
 	void SetBackground(TBackGround* bg);
 
 	void Render();
@@ -30,7 +26,7 @@ public:
 	void Clear();
 
 private:
-	SDL_Rect* windowRect;
+	SDL_Rect windowRect;
 	TBackGround* background;
 	SDL_Texture* texture;
 

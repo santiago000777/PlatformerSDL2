@@ -11,8 +11,6 @@ public:
 	void operator=(const TBackGround& rhs);
 	void operator=(TBackGround&& rhs);
 
-	void Init(int width, int height, std::string path, SDL_Renderer* renderer);
-
 	~TBackGround();
 
 	void Render(SDL_Rect* windowRect);

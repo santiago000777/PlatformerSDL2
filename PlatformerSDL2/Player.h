@@ -2,7 +2,7 @@
 #include "GameObject.h"
 class TPlayer : public TGameObject {
 public:
-    TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect from);
+    TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect from, SDL_Rect windowRect);
     TPlayer(const TPlayer&& rhs) = delete;
     TPlayer(TPlayer&& rhs) = delete;
     void operator=(const TPlayer& rhs);

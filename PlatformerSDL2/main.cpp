@@ -6,12 +6,20 @@
 int main(int argc, char* args[]) {
 	
 	TGame game("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN);
-	
-	game.AddPlayer({ 1100, 250, 100, 100 }, "Pictures/healer_f.bmp", {0, 0, 32, 36});
-	game.AddTexture({ 1, 300, 100, 24 }, "Pictures/healer_f.bmp", { 0, 0, 32, 36 });
-	game.AddTexture({ 1000, 500, 100, 24 }, "Pictures/paddle.bmp", { 0, 0, 25, 6 });
-	game.AddTexture({ 500, 400, 100, 24 }, "Pictures/paddle.bmp", { 0, 0, 25, 6 });
-	game.AddTexture({ 590, 375, 100, 24 }, "Pictures/paddle.bmp", { 0, 0, 25, 6 });
+
+	for (int i = 0; i < 6; i++) {
+		game.AddTexture({ 300, 90 * i, 30, 90}, "Pictures/verticalWall.bmp", {0, 0, 7, 9});
+	}
+	for (int i = 0; i < 6; i++) {
+		game.AddTexture({ 900, 90 * i, 30, 90 }, "Pictures/verticalWall.bmp", { 0, 0, 7, 9 });
+	}
+	for (int i = 0; i < 10; i++) {
+		game.AddTexture({ 330 + (70*i), 0, 90, 30}, "Pictures/horizontalWall.bmp", {0, 0, 9, 7});
+	}
+	game.AddPlayer({ 550, 500, 100, 24 }, "Pictures/paddle.bmp", {0, 0, 25, 6});
+
+	game.AddTexture({ 500, 200, 7 * 5, 7 * 5 }, "Pictures/BallBmp.bmp", { 0, 0, 7, 8 });
+
 	game.SetBackGround("Pictures/veitImg.bmp");
 	
 	while (!PressedKey(VK_SPACE)) {
