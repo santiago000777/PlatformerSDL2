@@ -23,10 +23,8 @@
 #define BREAK	__debugbreak
 #define PI		3.14159265359
 
-
 	// SDL2
 #include "SDL.h"
-
 
 static bool PressedKey(short key) {
 	short i = GetAsyncKeyState(toupper(key));
@@ -36,21 +34,15 @@ static bool PressedKey(short key) {
 	return true;
 }
 
-
 struct TVec2 {
 public:
-	int x, y;
+	int x{0}, y{0};
 
 public:
-	TVec2(int x, int y) {
-		this->x = x;
-		this->y = y;
+	TVec2() {}
+	TVec2(int x, int y)
+		: x(x), y(y) {
 	}
-	TVec2() {
-		x = 0;
-		y = 0;
-	}
-
 	void operator+=(const TVec2& vec) {
 		this->x += vec.x;
 		this->y += vec.y;
@@ -59,24 +51,16 @@ public:
 		vec += *this;
 		return vec;
 	}
-	
 };
+
 struct TVec4 {
 public:
-	int x, y, w, h;
+	int x{0}, y{0}, w{0}, h{0};
 
 public:
-	TVec4(int x, int y, int w, int h) {
-		this->x = x;
-		this->y = y;
-		this->w = w;
-		this->h = h;
-	}
-	TVec4() {
-		x = 0;
-		y = 0;
-		w = 0;
-		h = 0;
+	TVec4() {}
+	TVec4(int x, int y, int w, int h) 
+		: x(x), y(y), w(w), h(h) {
 	}
 
 	void operator+=(const TVec4& vec) {
@@ -89,17 +73,13 @@ public:
 	}
 };
 
-
 struct TColor {
 public:
 	unsigned char r, g, b, a;
 
 public:
 	TColor() = default;
-	TColor(unsigned char red, unsigned char green, unsigned char blue, unsigned char alfa) {
-		this->r = red;
-		this->g = green;
-		this->b = blue;
-		this->a = alfa;
+	TColor(unsigned char red, unsigned char green, unsigned char blue, unsigned char alfa) 
+		: r(red), g(green), b(blue), a(alfa) {
 	}
 };
