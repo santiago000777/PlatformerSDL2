@@ -1,6 +1,6 @@
 #include "Player.h"
 
-#define FPS		60
+#define FPS		165
 
 class TGame {
 public:

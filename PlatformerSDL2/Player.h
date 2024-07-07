@@ -7,7 +7,7 @@ public:
         // copy ctor (zakazany)
     TPlayer(const TPlayer& rhs) = delete;
         // move ctor (zakazany)
-    TPlayer(TPlayer&& rhs) = delete;
+    TPlayer(TPlayer&& rhs)/* = delete*/;
         // Destructor
     ~TPlayer();
         // copy prirazeni

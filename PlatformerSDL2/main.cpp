@@ -5,7 +5,7 @@
 
 int main(int argc, char* args[]) {
 	
-	TGame game("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN);
+	TGame game("TITLE", 2560, 500, 1200, 600, SDL_WINDOW_SHOWN); // SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
 
 	for (int i = 0; i < 6; i++) {
 		game.AddTexture({ 300, 90 * i, 30, 90}, "Pictures/verticalWall.bmp", {0, 0, 7, 9});
@@ -18,7 +18,8 @@ int main(int argc, char* args[]) {
 	}
 	game.AddPlayer({ 550, 500, 100, 24 }, "Pictures/paddle.bmp", {0, 0, 25, 6});
 
-	game.AddTexture({ 500, 200, 7 * 5, 7 * 5 }, "Pictures/BallBmp.bmp", { 0, 0, 7, 8 });
+	const float ballScale = 3.0f;
+	game.AddTexture({ 500, 200, (int)roundf(7 * ballScale), (int)roundf(7 * ballScale) }, "Pictures/BallBmp.bmp", { 0, 0, 7, 8 });
 
 	game.SetBackGround("Pictures/veitImg.bmp");
 	

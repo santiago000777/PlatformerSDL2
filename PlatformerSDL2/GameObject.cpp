@@ -9,6 +9,15 @@ void TGameObject::SetBackground(TBackGround* bg) {
 	background = bg;
 }
 
+TGameObject::TGameObject(TGameObject&& rhs) {
+	this->dstBox = rhs.dstBox;
+	this->srcBox = rhs.srcBox;
+	this->windowRect = rhs.windowRect;
+
+	this->renderer = rhs.renderer;
+	this->texture = rhs.texture;
+}
+
 TGameObject::~TGameObject() {
 	SDL_DestroyTexture(texture);
 	std::cout << "Deleted Object!" << std::endl;

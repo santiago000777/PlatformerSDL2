@@ -1,5 +1,5 @@
 #pragma once
-#include "SpriteSheet.h"
+#include "Texture.h"
 
 class TGameObject
 {
@@ -9,7 +9,7 @@ public:
 		// copy ctor (zakazany)
 	TGameObject(const TGameObject& rhs) = delete;
 		// move ctor (zakazany)
-	TGameObject(TGameObject&& rhs) = delete;
+	TGameObject(TGameObject&& rhs)/* = delete*/;
 		// Destructor
 	~TGameObject();
 		// copy prirazeni
@@ -47,7 +47,6 @@ protected:
 	SDL_Rect dstBox;
 	SDL_Rect srcBox;
 
-	int pom = 4;
 	bool kolize[4];
 
 };

@@ -4,6 +4,10 @@ TPlayer::TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& pat
 	: TGameObject(renderer, dstBox, path, from, windowRect) {
 	
 }
+TPlayer::TPlayer(TPlayer&& rhs) 
+	: TGameObject(std::move(rhs)) {
+
+}
 
 void TPlayer::operator=(const TPlayer& rhs) {
 	BREAK();
@@ -11,6 +15,7 @@ void TPlayer::operator=(const TPlayer& rhs) {
 void TPlayer::operator=(TPlayer&& rhs) {
 	BREAK();
 }
+
 
 TPlayer::~TPlayer() {
 	std::cout << "Deleted player\n";
