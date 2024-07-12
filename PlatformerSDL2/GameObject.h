@@ -1,5 +1,8 @@
 #pragma once
+//#include "Texture.h"
+//#include "common.h"
 #include "Texture.h"
+#include "BackGround.h"
 
 class TGameObject
 {

@@ -1,3 +1,4 @@
+#include "common.h"
 #include "Game.h"
 
 void TGame::InitWindow(const std::string& windowName, int posX, int posY, int windowWidth, int windowHeight, int flags) {

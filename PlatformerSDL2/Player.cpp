@@ -1,3 +1,5 @@
+#include "common.h"
+//#include "GameObject.h"
 #include "Player.h"
 
 TPlayer::TPlayer(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect from, SDL_Rect windowRect)

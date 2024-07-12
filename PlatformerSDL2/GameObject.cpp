@@ -1,3 +1,4 @@
+#include "common.h"
 #include "GameObject.h"
 
 TGameObject::TGameObject(SDL_Renderer* renderer, SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox, SDL_Rect windowRect)

@@ -1,3 +1,4 @@
+#include "common.h"
 #include "BackGround.h"
 
 TBackGround::TBackGround(int width, int height, std::string path, SDL_Renderer* renderer) 

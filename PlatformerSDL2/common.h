@@ -19,7 +19,6 @@
 #include <windows.h>
 #include <winuser.h>
 
-#define DEBUG()	if(GetAsyncKeyState(VK_ESCAPE)) {__debugbreak();}
 #define BREAK	__debugbreak
 #define PI		3.14159265359
 

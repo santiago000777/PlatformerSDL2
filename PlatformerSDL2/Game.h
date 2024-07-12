@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "BackGround.h"
+#include "GameObject.h"
 #define FPS		60
 
 class TGame {
@@ -22,8 +24,8 @@ public:
 	/// <param name="percentX">-> How many percent of the image will be visible (x axis)</param>
 	/// <param name="percentY">-> How many percent of the image will be visible (y axis)</param>
 	void AddTexture(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
-	
-	
+
+
 	/// <summary>
 	/// Create a new player and stores it in vector objects
 	/// </summary>
@@ -55,12 +57,12 @@ private:
 	const float posunPeriod = 1000.0f / 9000;
 	std::chrono::time_point<std::chrono::high_resolution_clock> firstFrame, secondFrame, firstPosun, secondPosun;
 	std::chrono::milliseconds durationFrame, durationPosun;
-	
-	
+
+
 
 private:
 	void InitWindow(const std::string& windowName = "Window", int posX = SDL_WINDOWPOS_CENTERED,
-		int posY = SDL_WINDOWPOS_CENTERED, int windowWidth = 800, int windowHeight = 600, int flags = SDL_WINDOW_SHOWN);
+					int posY = SDL_WINDOWPOS_CENTERED, int windowWidth = 800, int windowHeight = 600, int flags = SDL_WINDOW_SHOWN);
 	void InitRenderer(SDL_Window* window, int index = -1, int flags = 1);
 
 	/// <summary>

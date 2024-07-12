@@ -1,5 +1,5 @@
+#include "common.h"
 #include "Texture.h"
-//#include "common.h"
 
 SDL_Texture* TTexture::Create(SDL_Renderer* renderer, const std::string& path) {
 	

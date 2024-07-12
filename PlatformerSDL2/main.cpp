@@ -1,3 +1,4 @@
+#include "common.h"
 #include "Game.h"
 /* 
 	1. "Active solution platform" -> x64

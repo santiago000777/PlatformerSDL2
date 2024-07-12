@@ -1,5 +1,4 @@
 #pragma once
-#include "BackGround.h"
 
 class TTexture
 {
