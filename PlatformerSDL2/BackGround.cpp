@@ -24,3 +24,7 @@ void TBackGround::Render(SDL_Rect* windowRect) {
 		// Uprava pomoci SDL_RenderCopy() -> zavolani SDL_RenderPresent() na vykresleni naraz v Game.cpp
 	SDL_RenderCopy(renderer, texture, NULL, windowRect);
 }
+
+SDL_Texture* TBackGround::GetTexture() {
+	return texture;
+}

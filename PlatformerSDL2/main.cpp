@@ -5,7 +5,7 @@
 
 int main(int argc, char* args[]) {
 	
-	TGame game("TITLE", 2560, 500, 1200, 600, SDL_WINDOW_SHOWN); // SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
+	TGame game("TITLE", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN); // SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED
 
 	for (int i = 0; i < 6; i++) {
 		game.AddTexture({ 300, 90 * i, 30, 90}, "Pictures/verticalWall.bmp", {0, 0, 7, 9});
@@ -15,6 +15,9 @@ int main(int argc, char* args[]) {
 	}
 	for (int i = 0; i < 10; i++) {
 		game.AddTexture({ 330 + (70*i), 0, 90, 30}, "Pictures/horizontalWall.bmp", {0, 0, 9, 7});
+	}
+	for (int i = 0; i < 10; i++) {
+		game.AddTexture({ 330 + (70 * i), 540, 90, 30 }, "Pictures/horizontalWall.bmp", { 0, 0, 9, 7 });
 	}
 	game.AddPlayer({ 550, 500, 100, 24 }, "Pictures/paddle.bmp", {0, 0, 25, 6});
 

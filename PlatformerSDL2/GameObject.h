@@ -27,11 +27,6 @@ public:
 	void Posun(std::vector<TGameObject*>* otherObjects, float delta);
 	void Clear();
 
-private:
-	SDL_Rect windowRect;
-	TBackGround* background;
-	SDL_Texture* texture;
-
 	enum eIndex : int {
 		LEFT = 0,
 		RIGHT,
@@ -40,14 +35,20 @@ private:
 	};
 
 protected:
-	void MistoKolize(std::vector<TGameObject*>* otherObjects, float delta);
-
 	SDL_Renderer* renderer;
 	TVec2 vector;
 	SDL_Rect dstBox;
 	SDL_Rect srcBox;
 
 	bool kolize[4];
+
+private:
+	SDL_Rect windowRect;
+	TBackGround* background;
+	SDL_Texture* texture;
+
+	void MistoKolize(std::vector<TGameObject*>* otherObjects, float delta);
+
 
 };
 

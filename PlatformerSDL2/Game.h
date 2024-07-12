@@ -1,6 +1,5 @@
 #include "Player.h"
-
-#define FPS		165
+#define FPS		60
 
 class TGame {
 public:
@@ -36,6 +35,7 @@ public:
 	/// <param name="percentY">-> How many percent of the image will be visible (y axis)</param>
 	void AddPlayer(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
 
+	void AddBall(SDL_Rect dstBox, const std::string& path, SDL_Rect fromBox);
 
 	/// <summary>
 	/// Sets a background as texture and in every object sets it as backround

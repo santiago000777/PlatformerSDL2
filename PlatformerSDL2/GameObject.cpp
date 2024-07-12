@@ -94,7 +94,7 @@ void TGameObject::Posun(std::vector<TGameObject*>* otherObjects, float delta) {
 }
 
 void TGameObject::Clear() {
-	SDL_RenderCopy(renderer, background->texture, &srcBox, &dstBox);
+	SDL_RenderCopy(renderer, background->GetTexture(), &srcBox, &dstBox);
 }
 
 bool TGameObject::operator==(TGameObject obj) {

@@ -20,11 +20,10 @@ public:
 	~TBackGround();
 
 	void Render(SDL_Rect* windowRect);
-
-public:
-	SDL_Texture* texture;
+	SDL_Texture* GetTexture();
 
 private:
+	SDL_Texture* texture;
 	SDL_Renderer* renderer;
 	SDL_Rect box;
 };
